@@ -1,0 +1,111 @@
+[gd_scene load_steps=8 format=3 uid="uid://dlnkyq4oq3agl"]
+
+[ext_resource type="Script" uid="uid://bved3x8jdw7pn" path="res://UserInterface/user_interface.gd" id="1_3o1tv"]
+[ext_resource type="Texture2D" uid="uid://bekeiub24uv8" path="res://UserInterface/Healthbar_Under.png" id="1_cp462"]
+[ext_resource type="Texture2D" uid="uid://c52jvrmas1mbf" path="res://UserInterface/Healthbar_Over.png" id="2_3o1tv"]
+[ext_resource type="Texture2D" uid="uid://bwys30io0q75q" path="res://UserInterface/xp_bar.png" id="3_1yg0r"]
+[ext_resource type="PackedScene" uid="uid://j7oow4yyik0h" path="res://UserInterface/inventory.tscn" id="6_1yg0r"]
+[ext_resource type="Script" uid="uid://bq4degulgxkp3" path="res://UserInterface/SpellHotbar.gd" id="6_l8ojb"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7061l"]
+font_color = Color(0, 0, 0, 1)
+
+[node name="UserInterface" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3o1tv")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 1915.0
+offset_bottom = 1072.0
+
+[node name="InfoBar" type="Control" parent="MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HealthBarUnder" type="TextureRect" parent="MarginContainer/InfoBar"]
+layout_mode = 0
+offset_left = 101.0
+offset_top = 14.0
+offset_right = 445.0
+offset_bottom = 77.0
+texture = ExtResource("1_cp462")
+
+[node name="HealthBar" type="TextureProgressBar" parent="MarginContainer/InfoBar/HealthBarUnder"]
+unique_name_in_owner = true
+z_index = -1
+layout_mode = 0
+offset_right = 342.0
+offset_bottom = 43.0
+value = 100.0
+texture_progress = ExtResource("2_3o1tv")
+
+[node name="HealthLabel" type="Label" parent="MarginContainer/InfoBar/HealthBarUnder/HealthBar"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 12.0
+offset_top = 11.0
+offset_right = 71.0
+offset_bottom = 58.0
+text = "100"
+label_settings = SubResource("LabelSettings_7061l")
+
+[node name="ManaBar" type="TextureProgressBar" parent="MarginContainer/InfoBar/HealthBarUnder"]
+unique_name_in_owner = true
+z_index = -1
+layout_mode = 0
+offset_left = 1.0
+offset_top = 44.0
+offset_right = 343.0
+offset_bottom = 87.0
+value = 100.0
+texture_progress = ExtResource("2_3o1tv")
+tint_over = Color(0.22745098, 1, 1, 1)
+tint_progress = Color(0, 0.94739515, 0.94774014, 1)
+
+[node name="ManaLabel" type="Label" parent="MarginContainer/InfoBar/HealthBarUnder/ManaBar"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 12.0
+offset_top = 11.0
+offset_right = 71.0
+offset_bottom = 58.0
+text = "100"
+label_settings = SubResource("LabelSettings_7061l")
+
+[node name="XPBar" type="TextureProgressBar" parent="MarginContainer/InfoBar/HealthBarUnder"]
+unique_name_in_owner = true
+z_index = -1
+layout_mode = 0
+offset_left = 13.0
+offset_top = 25.0
+offset_right = 328.0
+offset_bottom = 65.0
+value = 100.0
+nine_patch_stretch = true
+texture_progress = ExtResource("3_1yg0r")
+
+[node name="Inventory" parent="." instance=ExtResource("6_1yg0r")]
+visible = false
+layout_mode = 1
+
+[node name="SpellHotbar" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -70.0
+offset_right = 150.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("6_l8ojb")

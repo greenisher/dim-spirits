@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://0mhnnaih4xno"]
+
+[ext_resource type="PackedScene" uid="uid://kfq8r71q4cjk" path="res://Assets/places/ropebridge_end.glb" id="1_wicbr"]
+[ext_resource type="PackedScene" uid="uid://bleged7jwjeg" path="res://Assets/places/chest.glb" id="2_mdr4y"]
+[ext_resource type="PackedScene" uid="uid://sx62hcipqyyo" path="res://Assets/places/lamp.glb" id="3_63qm2"]
+[ext_resource type="PackedScene" uid="uid://bxku5ow380k5h" path="res://Assets/places/candle.glb" id="4_qeend"]
+[ext_resource type="PackedScene" uid="uid://c72em5ckdkbyp" path="res://Assets/places/flower1.glb" id="5_pqjyg"]
+[ext_resource type="PackedScene" uid="uid://cft2se8jhfwmv" path="res://Assets/Characters/Skoll/skoll_anims.gltf" id="6_d0liq"]
+
+[node name="BridgeToTown" type="Node3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(14.195772, 0, 0, 0, 0.13341141, 0, 0, 0, 14.326629, 0, 0, -3.0532835)
+
+[node name="ropebridge_end" parent="." instance=ExtResource("1_wicbr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.841866, 5.8035536)
+
+[node name="chest" parent="." instance=ExtResource("2_mdr4y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7970314, 0, 3.066584)
+
+[node name="lamp" parent="." instance=ExtResource("3_63qm2")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 2.524006, 0, 8.742278e-08, 0, -1, 4.5475736, 0.02157712, 3.058113)
+
+[node name="candle" parent="lamp" instance=ExtResource("4_qeend")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6460015, 0.014568329)
+
+[node name="flower1" parent="." instance=ExtResource("5_pqjyg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0957508, 0, 3.1719713)
+
+[node name="flower2" parent="." instance=ExtResource("5_pqjyg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1701474, 0, 3.1719713)
+
+[node name="flower3" parent="." instance=ExtResource("5_pqjyg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8688183, 0, 2.446146)
+
+[node name="AuxScene" parent="." instance=ExtResource("6_d0liq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.705302, 1.1882823, 0)

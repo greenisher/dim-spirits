@@ -1,0 +1,11 @@
+~ start
+Rags: [[Hi|Hello|Howdy]], this is some dialogue.
+Rags: Here are some choices.
+- First one
+	Rags: You picked the first one.
+- Second one
+	Rags: You picked the second one.
+- Start again => start
+- End the conversation => END
+Rags: For more information see the online documentation.
+=> END

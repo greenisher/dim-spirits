@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Spell" load_steps=3 format=3 uid="uid://ctco0m7nx2lba"]
+
+[ext_resource type="Texture2D" uid="uid://drckt6rtty8mh" path="res://UserInterface/projectile.png" id="1_edwp4"]
+[ext_resource type="Script" uid="uid://bpn77lvk0wfxf" path="res://Resources/Spell.gd" id="1_m0nop"]
+
+[resource]
+script = ExtResource("1_m0nop")
+spell_name = "Healing Aura"
+description = "Regenerates health over time. The final priest was all that was left of the clergy after the first wave of demons broke Luteberg. Injured and delirious, he chanted and called out to the gods. His congregation remained still, broken dolls on the flagstones. Who was left to hear?"
+icon = ExtResource("1_edwp4")
+spell_type = 3
+mana_cost = 30.0
+cooldown = 10.0
+shield_absorption = 0.0
+spell_color = Color(0.684173, 0.9874751, 0, 1)
+metadata/_custom_type_script = "uid://bpn77lvk0wfxf"
