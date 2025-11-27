@@ -1,0 +1,86 @@
+[gd_scene load_steps=9 format=3 uid="uid://kuhoxd2oklfg"]
+
+[ext_resource type="PackedScene" uid="uid://5dknym1exubj" path="res://Player/player.tscn" id="1_bnbg7"]
+[ext_resource type="PackedScene" uid="uid://1f1hmustdry1" path="res://Assets/places/bench.glb" id="2_xuaut"]
+[ext_resource type="PackedScene" uid="uid://sx62hcipqyyo" path="res://Assets/places/lamp.glb" id="3_dogml"]
+[ext_resource type="PackedScene" uid="uid://bxku5ow380k5h" path="res://Assets/places/candle.glb" id="4_6dwi7"]
+[ext_resource type="PackedScene" uid="uid://bv2a78my82mqp" path="res://Assets/places/chair.glb" id="5_pd7x5"]
+[ext_resource type="PackedScene" uid="uid://dyfpdn424pog2" path="res://Assets/places/table.glb" id="6_fc41j"]
+[ext_resource type="PackedScene" uid="uid://5w2cnox2ycd" path="res://Assets/places/bookcase.glb" id="7_4lwwx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_422nk"]
+albedo_color = Color(0.5489626, 0.5489626, 0.54896253, 1)
+
+[node name="UpperLutebergWizTower" type="Node3D"]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.048989765, 0, 0, 0, 1, 0, 0, 0)
+use_collision = true
+radius = 12.0
+height = 12.0
+material = SubResource("StandardMaterial3D_422nk")
+
+[node name="Player" parent="." instance=ExtResource("1_bnbg7")]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(0.3695298, 0, 0.36172217, 0, 0.99999994, 0, -0.14337568, 0, 0.9322859, -9.969909, 2.9218748, 4.168258)
+use_collision = true
+size = Vector3(1, 6.84375, 8.951111)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(0.3638359, 0, -0.39676344, 0, 1, 0, 0.15726501, 0, 0.91792107, -10.1574135, 2.9218748, -4.0033875)
+use_collision = true
+size = Vector3(1, 6.84375, 8.951111)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(0.16333239, 0, -0.9111518, 0, 0.9999999, 0, 0.3611528, 0, 0.4120711, -4.2762613, 2.999482, -9.822338)
+use_collision = true
+size = Vector3(1, 6.84375, 8.951111)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="."]
+transform = Transform3D(-0.1439624, 0, -0.9317104, 0, 0.9999999, 0, 0.3693016, 0, -0.36320248, 4.137003, 2.999482, -10.173073)
+use_collision = true
+size = Vector3(1, 6.84375, 8.951111)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="."]
+transform = Transform3D(-0.3620454, 0, -0.40705556, 0, 1, 0, 0.16134447, 0, -0.9134035, 9.899929, 2.79473, -4.619584)
+use_collision = true
+size = Vector3(1, 6.84375, 8.951111)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="."]
+transform = Transform3D(-0.37111792, 0, 0.35122067, 0, 1, 0, -0.13921325, 0, -0.9362927, 10.488386, 2.79473, 3.533001)
+use_collision = true
+size = Vector3(1, 6.84375, 8.951111)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="."]
+transform = Transform3D(-0.15621021, 0, 0.91906685, 0, 0.9999999, 0, -0.36429, 0, -0.39410242, 4.9113584, 2.872337, 9.736239)
+use_collision = true
+size = Vector3(1, 6.84375, 8.951111)
+
+[node name="bench" parent="." instance=ExtResource("2_xuaut")]
+transform = Transform3D(0.9099323, 0, -0.41475677, 0, 1, 0, 0.41475677, 0, 0.9099323, 3.7629242, 0.2827735, -9.194427)
+
+[node name="lamp" parent="." instance=ExtResource("3_dogml")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6171621, 0.37923825, -10.064197)
+
+[node name="candle" parent="lamp" instance=ExtResource("4_6dwi7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6497899, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="lamp/candle"]
+
+[node name="chair" parent="." instance=ExtResource("5_pd7x5")]
+transform = Transform3D(-1.0294323, 0, -1.0909946, 0, 1.5, 0, 1.0909946, 0, -1.0294323, 0, 0.37768126, -10.475962)
+
+[node name="chair2" parent="." instance=ExtResource("5_pd7x5")]
+transform = Transform3D(1.439583, 0, 0.42142725, 0, 1.4999999, 0, -0.42142725, 0, 1.439583, 7.2785053, 0.30524313, 1.19841)
+
+[node name="table" parent="." instance=ExtResource("6_fc41j")]
+transform = Transform3D(0.90094835, 0, -0.4339264, 0, 1, 0, 0.4339264, 0, 0.90094835, 9.381447, 0.14676213, 1.511684)
+
+[node name="candle" parent="table" instance=ExtResource("4_6dwi7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2826447, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="table/candle"]
+
+[node name="bookcase" parent="." instance=ExtResource("7_4lwwx")]
+transform = Transform3D(0.9034999, 0, 0.42858833, 0, 1, 0, -0.42858833, 0, 0.9034999, 8.410114, 1.4621665, -2.5697024)

@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bw0fth51bqv4u"]
+
+[ext_resource type="PackedScene" uid="uid://5dknym1exubj" path="res://Player/player.tscn" id="1_1gnq4"]
+[ext_resource type="PackedScene" uid="uid://bv2a78my82mqp" path="res://Assets/places/chair.glb" id="2_3io0x"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h78ic"]
+albedo_color = Color(0.46082336, 0.45347387, 2.8878452e-07, 1)
+
+[node name="EndBossArena" type="Node3D"]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+use_collision = true
+radius = 15.0
+height = 5.0
+material = SubResource("StandardMaterial3D_h78ic")
+
+[node name="Player" parent="." instance=ExtResource("1_1gnq4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.554449, 0)
+
+[node name="chair" parent="." instance=ExtResource("2_3io0x")]
+transform = Transform3D(1.8753172, 0, -0.6951152, 0, 2, 0, 0.6951152, 0, 1.8753172, -11.642439, 2.5937579, -3.3208323)

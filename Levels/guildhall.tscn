@@ -1,0 +1,84 @@
+[gd_scene load_steps=10 format=3 uid="uid://dgi3l5o6dhi4g"]
+
+[ext_resource type="PackedScene" uid="uid://5dknym1exubj" path="res://Player/player.tscn" id="1_6n0ck"]
+[ext_resource type="PackedScene" uid="uid://6dvw1434oej3" path="res://Assets/places/anvil.glb" id="2_ifd34"]
+[ext_resource type="PackedScene" uid="uid://whl0x3lc64qv" path="res://Assets/campfire.tscn" id="3_se3hq"]
+[ext_resource type="PackedScene" uid="uid://bw0rj8uxhiy6h" path="res://Assets/places/sink.glb" id="4_ce6bq"]
+[ext_resource type="PackedScene" uid="uid://sx62hcipqyyo" path="res://Assets/places/lamp.glb" id="5_53rc8"]
+[ext_resource type="PackedScene" uid="uid://bxku5ow380k5h" path="res://Assets/places/candle.glb" id="6_0mygs"]
+[ext_resource type="PackedScene" uid="uid://5w2cnox2ycd" path="res://Assets/places/bookcase.glb" id="7_571ig"]
+[ext_resource type="PackedScene" uid="uid://bleged7jwjeg" path="res://Assets/places/chest.glb" id="8_se3hq"]
+[ext_resource type="PackedScene" uid="uid://bv2a78my82mqp" path="res://Assets/places/chair.glb" id="9_ce6bq"]
+
+[node name="Guildhall" type="Node3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(17.572746, 0, 0, 0, -0.014226794, 0, 0, 0, 13.852935, -0.22339821, -0.18153644, -0.058125973)
+use_collision = true
+size = Vector3(1, 1, 1.1948242)
+
+[node name="Player" parent="." instance=ExtResource("1_6n0ck")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.36216354, 0)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(0.42249304, 0, 0, 0, 13.088407, 0, 0, 0, 8.173726, -8.873995, 6.2171183, -0.45498276)
+size = Vector3(1, 1, 2.0722656)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(0.42249304, 0, 0, 0, 13.088407, 0, 0, 0, 8.173726, 8.606644, 6.2171183, 0.009560585)
+size = Vector3(1, 1, 2.0722656)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="."]
+transform = Transform3D(-1.8467757e-08, 0, 8.508765, 0, 8.123228, 0, -0.42249304, 0, -3.7192993e-07, -0.122122765, 8.604805, 7.959839)
+size = Vector3(1, 1, 2.0722656)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="."]
+transform = Transform3D(-1.8467757e-08, 0, 8.508765, 0, 13.088407, 0, -0.42249304, 0, -3.7192993e-07, -0.122122765, 6.2171183, -8.3873825)
+size = Vector3(1, 1, 2.0722656)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="."]
+transform = Transform3D(-1.8467757e-08, 0, 3.6956937, 0, 13.088407, 0, -0.42249304, 0, -1.615439e-07, 5.076729, 6.2171183, 7.8581314)
+size = Vector3(1, 1, 2.0722656)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="."]
+transform = Transform3D(-1.8467757e-08, 0, 3.6956937, 0, 13.088407, 0, -0.42249304, 0, -1.615439e-07, -5.312954, 6.2171183, 7.8581314)
+size = Vector3(1, 1, 2.0722656)
+
+[node name="anvil" parent="." instance=ExtResource("2_ifd34")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 6.53006, 0, -2.0020332)
+
+[node name="campfire" parent="." instance=ExtResource("3_se3hq")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -6.633047, 0, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="campfire"]
+
+[node name="sink" parent="." instance=ExtResource("4_ce6bq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.2330866, 0, 0)
+
+[node name="lamp" parent="." instance=ExtResource("5_53rc8")]
+transform = Transform3D(-6.556708e-08, 0, 1.5, 0, 1.5, 0, -1.5, 0, -6.556708e-08, -7.7936373, 0, -7.042347)
+
+[node name="candle" parent="lamp" instance=ExtResource("6_0mygs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6814839, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="lamp/candle"]
+
+[node name="lamp2" parent="." instance=ExtResource("5_53rc8")]
+transform = Transform3D(1.0606601, 0, -1.0606601, 0, 1.5, 0, 1.0606601, 0, 1.0606601, 7.5019865, 0, -7.042347)
+
+[node name="candle" parent="lamp2" instance=ExtResource("6_0mygs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6814839, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="lamp2/candle"]
+
+[node name="bookcase" parent="." instance=ExtResource("7_571ig")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -4.517008, 1.0821033, -5.8777094)
+
+[node name="bookcase2" parent="." instance=ExtResource("7_571ig")]
+transform = Transform3D(-4.371139e-08, 0, 1, -0.44796196, 0.8940526, -1.9581039e-08, -0.8940526, -0.44796196, -3.908028e-08, -0.47295475, 1.5693066, -5.570004)
+
+[node name="chest" parent="." instance=ExtResource("8_se3hq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0095477, -0.19770181, -7.6931887)
+
+[node name="chair" parent="." instance=ExtResource("9_ce6bq")]
+transform = Transform3D(0.62592345, 0, 0.77988446, 0, 1, 0, -0.77988446, 0, 0.62592345, -7.0412292, 0, 2.7043886)

@@ -1,0 +1,112 @@
+[gd_scene load_steps=11 format=3 uid="uid://cvfcptswtpwk4"]
+
+[ext_resource type="PackedScene" uid="uid://5dknym1exubj" path="res://Player/player.tscn" id="1_661ah"]
+[ext_resource type="PackedScene" uid="uid://bcq8idf21a4c7" path="res://Assets/places/castle_wall.glb" id="2_4o1u0"]
+[ext_resource type="PackedScene" uid="uid://c72em5ckdkbyp" path="res://Assets/places/flower1.glb" id="3_kvxpw"]
+[ext_resource type="PackedScene" uid="uid://1f1hmustdry1" path="res://Assets/places/bench.glb" id="4_adi8i"]
+[ext_resource type="PackedScene" uid="uid://xlbbf32muvqm" path="res://Assets/places/shop2.glb" id="5_vc7mu"]
+[ext_resource type="PackedScene" uid="uid://cjs3b2g7vkb7p" path="res://Assets/places/old church.glb" id="6_hjl7u"]
+[ext_resource type="PackedScene" uid="uid://btpwuqcy3ik2x" path="res://Assets/places/shop1.glb" id="7_g7b8x"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l2o4q"]
+albedo_color = Color(0.8745338, 0.6785388, 0.3206041, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rxv4q"]
+albedo_color = Color(0.423439, 0.29591185, 0.0053698034, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3xnns"]
+albedo_color = Color(0.6542321, 0.6542321, 0.654232, 1)
+metallic = 1.0
+metallic_texture_channel = 3
+roughness = 0.5
+
+[node name="UpperLutebergGates" type="Node3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(16.876656, 0, 0, 0, 0.32406485, 0, 0, 0, 16.921999, 0, 0, 0)
+use_collision = true
+material = SubResource("StandardMaterial3D_l2o4q")
+
+[node name="Player" parent="." instance=ExtResource("1_661ah")]
+
+[node name="castle_wall" parent="." instance=ExtResource("2_4o1u0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.497043, 0, -6.227436)
+
+[node name="castle_wall2" parent="." instance=ExtResource("2_4o1u0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0028458, 0, -6.227436)
+
+[node name="castle_wall3" parent="." instance=ExtResource("2_4o1u0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.2395782, 0, -6.227436)
+
+[node name="castle_wall4" parent="." instance=ExtResource("2_4o1u0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.1303477, 0, -6.227436)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(2.092651, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.6702547, 3.438611, -8.013446)
+use_collision = true
+size = Vector3(1.5371094, 1, 0.76171875)
+material = SubResource("StandardMaterial3D_rxv4q")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(2.092651, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.6702547, 0.3758502, -8.013446)
+use_collision = true
+size = Vector3(1.5371094, 1, 0.76171875)
+material = SubResource("StandardMaterial3D_rxv4q")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6230971, 1.9157392, -8.033367)
+radius = 0.125
+height = 3.046875
+material = SubResource("StandardMaterial3D_3xnns")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12456685, 1.9157392, -8.033367)
+radius = 0.125
+height = 3.046875
+material = SubResource("StandardMaterial3D_3xnns")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.34245622, 1.9157392, -8.033367)
+radius = 0.125
+height = 3.046875
+material = SubResource("StandardMaterial3D_3xnns")
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.82590204, 1.9157392, -8.033367)
+radius = 0.125
+height = 3.046875
+material = SubResource("StandardMaterial3D_3xnns")
+
+[node name="CSGCylinder3D5" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.296452, 1.9157392, -8.033367)
+radius = 0.125
+height = 3.046875
+material = SubResource("StandardMaterial3D_3xnns")
+
+[node name="CSGCylinder3D6" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7849355, 1.9157392, -8.033367)
+use_collision = true
+radius = 0.125
+height = 3.046875
+material = SubResource("StandardMaterial3D_3xnns")
+
+[node name="flower1" parent="." instance=ExtResource("3_kvxpw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7867298, 0, -6.750717)
+
+[node name="bench" parent="." instance=ExtResource("4_adi8i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.227133, 0, -7.476966)
+
+[node name="shop2" parent="." instance=ExtResource("5_vc7mu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.299484, 0, 0)
+
+[node name="old church" parent="." instance=ExtResource("6_hjl7u")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 12.912227, 3.6600132, 5.369222)
+
+[node name="shop1" parent="." instance=ExtResource("7_g7b8x")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 8.794455, 0, 9.651667)
+
+[node name="shop3" parent="." instance=ExtResource("5_vc7mu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.357566, 0, 0)
+
+[node name="shop4" parent="." instance=ExtResource("5_vc7mu")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -11.125803, -0.35204506, 8.405199)

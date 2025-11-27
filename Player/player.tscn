@@ -1,0 +1,136 @@
+[gd_scene load_steps=14 format=3 uid="uid://5dknym1exubj"]
+
+[ext_resource type="Script" uid="uid://bw5og7c7i6o47" path="res://Player/player.gd" id="1_btcbx"]
+[ext_resource type="Script" uid="uid://6dsjcllex2b4" path="res://Resources/smooth_camera_arm.gd" id="2_btcbx"]
+[ext_resource type="PackedScene" uid="uid://cjwgfewq4f42b" path="res://Player/brid.tscn" id="2_gwnis"]
+[ext_resource type="PackedScene" uid="uid://ch6bij5yjdnr" path="res://Resources/health_component.tscn" id="2_k53q1"]
+[ext_resource type="Script" uid="uid://m7gkto088vb7" path="res://Resources/CharacterStats.gd" id="2_vtle1"]
+[ext_resource type="Script" uid="uid://cao6q71ag1vks" path="res://Resources/attack_cast.gd" id="5_fhl08"]
+[ext_resource type="PackedScene" uid="uid://c3ut20038fydn" path="res://Resources/area_attack.tscn" id="5_k53q1"]
+[ext_resource type="Script" uid="uid://c86kyb1fcnex5" path="res://Resources/MagicSystem.gd" id="8_00tjw"]
+[ext_resource type="PackedScene" uid="uid://dlnkyq4oq3agl" path="res://UserInterface/user_interface.tscn" id="8_od3ui"]
+
+[sub_resource type="Resource" id="Resource_od3ui"]
+script = ExtResource("2_vtle1")
+metadata/_custom_type_script = "uid://m7gkto088vb7"
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gwnis"]
+
+[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_k53q1"]
+
+[sub_resource type="Resource" id="Resource_00tjw"]
+script = ExtResource("2_vtle1")
+metadata/_custom_type_script = "uid://m7gkto088vb7"
+
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
+collision_layer = 5
+script = ExtResource("1_btcbx")
+stats = SubResource("Resource_od3ui")
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("body") instance=ExtResource("2_k53q1")]
+body = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.98585796, 0)
+shape = SubResource("CapsuleShape3D_gwnis")
+debug_color = Color(0.9464695, 4.9093364e-06, 0.58996165, 0.41960785)
+
+[node name="HorizontalPivot" type="Node3D" parent="."]
+
+[node name="VerticalPivot" type="Node3D" parent="HorizontalPivot"]
+
+[node name="SmoothCameraArm" type="SpringArm3D" parent="HorizontalPivot/VerticalPivot"]
+shape = SubResource("SeparationRayShape3D_k53q1")
+spring_length = 5.0
+script = ExtResource("2_btcbx")
+
+[node name="Camera3D" type="Camera3D" parent="HorizontalPivot/VerticalPivot/SmoothCameraArm"]
+h_offset = 1.0
+v_offset = 1.0
+
+[node name="RigPivot" type="Node3D" parent="."]
+
+[node name="Brid" parent="RigPivot" instance=ExtResource("2_gwnis")]
+
+[node name="Skeleton3D" parent="RigPivot/Brid/AuxScene2/Node" index="0"]
+bones/0/position = Vector3(-0.0028065953, 0.8215292, 0.021831168)
+bones/0/rotation = Quaternion(0.014881224, 0.99971515, -0.018600186, 0.0015219399)
+bones/1/rotation = Quaternion(0.07154918, -0.15200385, 0.98382044, 0.06223336)
+bones/2/rotation = Quaternion(0.5070405, -0.012850715, -0.02685248, 0.8614081)
+bones/3/rotation = Quaternion(0.024399633, -0.74223405, 0.6658777, -0.071416534)
+bones/4/rotation = Quaternion(0.41122884, 0.0956381, -0.032358304, 0.90592337)
+bones/5/rotation = Quaternion(-0.091498695, -0.09181911, 0.987244, -0.092447825)
+bones/6/rotation = Quaternion(0.4788214, 0.039946742, 0.007760751, 0.87696874)
+bones/7/rotation = Quaternion(0.06970701, 0.76762795, -0.6275244, -0.11000691)
+bones/8/rotation = Quaternion(0.4379381, -0.0891699, 0.03178127, 0.8940073)
+bones/9/rotation = Quaternion(0.029869337, -0.016790405, 0.0148838535, 0.999302)
+bones/10/rotation = Quaternion(0.028807854, -0.0032563878, -0.00014571186, 0.9995797)
+bones/11/rotation = Quaternion(0.028804418, -0.003225316, -0.00014664803, 0.9995799)
+bones/12/rotation = Quaternion(-0.03136498, -0.0015266809, 0.0042692404, 0.9994978)
+bones/13/rotation = Quaternion(0.06111556, -0.040646877, 0.10496816, 0.9917633)
+bones/14/rotation = Quaternion(0.6208457, -0.31907082, 0.61707526, 0.36326647)
+bones/15/rotation = Quaternion(0.25417784, 0.40687472, 0.11235759, 0.8701853)
+bones/16/rotation = Quaternion(0.018635664, 0.00034100228, 0.16835025, 0.985551)
+bones/17/rotation = Quaternion(0.025592465, -0.21337314, 0.048287056, 0.9754411)
+bones/18/rotation = Quaternion(0.164064, -0.011900647, -0.082713135, 0.98290384)
+bones/19/rotation = Quaternion(-0.09071821, 0.070541285, -0.23567149, 0.96501464)
+bones/20/rotation = Quaternion(0.089312434, 0.13160405, -0.13603969, 0.9778532)
+bones/21/rotation = Quaternion(0.60734427, 0.35601303, -0.5762506, 0.41511792)
+bones/22/rotation = Quaternion(0.45140737, -0.01841306, 0.08809652, 0.8877677)
+bones/23/rotation = Quaternion(0.014320113, -0.0040416853, -0.12799944, 0.9916627)
+bones/24/rotation = Quaternion(0.06439054, 0.09064423, -0.096671246, 0.98908657)
+bones/25/rotation = Quaternion(-0.007751673, 0.97901475, 0.119808376, 0.16466957)
+bones/26/rotation = Quaternion(0.12049358, -0.100808665, -0.25113398, 0.9551182)
+bones/27/rotation = Quaternion(-0.44069085, -0.08780775, 0.036893327, 0.8925919)
+
+[node name="mixamorigLeftToeBase" parent="RigPivot/Brid/AuxScene2/Node/Skeleton3D" index="0"]
+transform = Transform3D(-0.95872617, 0.178164, -0.22158968, -0.22133188, 0.021577924, 0.97495973, 0.17848414, 0.9837644, 0.018746048, 0.31152183, -0.00019578636, 0.15821403)
+
+[node name="mixamorigRightToeBase" parent="RigPivot/Brid/AuxScene2/Node/Skeleton3D" index="1"]
+transform = Transform3D(-0.9064904, -0.37191707, 0.1998814, 0.22046638, -0.013189346, 0.97530526, -0.3600964, 0.9281723, 0.093951166, -0.38967928, -0.0019080788, 0.06414022)
+
+[node name="mixamorigHead" parent="RigPivot/Brid/AuxScene2/Node/Skeleton3D" index="2"]
+transform = Transform3D(-0.95264447, 0.28563586, 0.10430969, 0.24712683, 0.9271094, -0.2817732, -0.17719102, -0.24265197, -0.95379406, 0.0417362, 1.6115265, -0.058058046)
+
+[node name="mixamorigLeftHandIndex3" parent="RigPivot/Brid/AuxScene2/Node/Skeleton3D" index="3"]
+transform = Transform3D(0.7253433, 0.24809696, -0.64212537, 0.5071604, -0.82333267, 0.25477737, -0.46547323, -0.51046145, -0.7230236, 0.38568082, 0.7082102, 0.07343791)
+
+[node name="mixamorigRightHandIndex3" parent="RigPivot/Brid/AuxScene2/Node/Skeleton3D" index="4"]
+transform = Transform3D(-0.3583946, 0.595746, -0.7187766, -0.0459913, -0.78025424, -0.6237688, -0.9324364, -0.19049773, 0.30703813, -0.38253695, 0.77457106, 0.033988826)
+
+[node name="RayAttachment" type="BoneAttachment3D" parent="RigPivot/Brid/AuxScene2" index="4"]
+transform = Transform3D(-0.27318233, -0.17508182, 0.9458953, 0.4611137, -0.8868001, -0.030970007, 0.84424233, 0.4277049, 0.32299083, -0.35585794, -0.110230625, 0.04875189)
+bone_name = "mixamorigRightHand"
+bone_idx = 24
+use_external_skeleton = true
+external_skeleton = NodePath("../Node/Skeleton3D")
+
+[node name="AttackCast" type="RayCast3D" parent="RigPivot/Brid/AuxScene2/RayAttachment"]
+unique_name_in_owner = true
+transform = Transform3D(-1.6905236, -1.0687047, 4.6714568e-08, 0, -8.742278e-08, -2, 1.0687047, -1.6905236, 7.389514e-08, 0.22632927, -0.013549566, -0.07053167)
+collision_mask = 8
+script = ExtResource("5_fhl08")
+
+[node name="RightHandBone" parent="RigPivot/Brid" index="2"]
+transform = Transform3D(-0.27318233, -0.17508182, 0.9458953, 0.4611137, -0.8868001, -0.030970007, 0.84424233, 0.4277049, 0.32299083, -0.35585794, 0.98175055, 0.04875189)
+
+[node name="AreaAttack" parent="RigPivot" instance=ExtResource("5_k53q1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9828198, 0)
+collision_mask = 8
+
+[node name="CastOrigin" type="Node3D" parent="RigPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.44954592, 0.7782804, 0)
+
+[node name="MagicSystem" type="Node3D" parent="." node_paths=PackedStringArray("cast_origin")]
+script = ExtResource("8_00tjw")
+stats = SubResource("Resource_00tjw")
+cast_origin = NodePath("../RigPivot/CastOrigin")
+
+[node name="UserInterface" parent="." instance=ExtResource("8_od3ui")]
+
+[connection signal="defeat" from="HealthComponent" to="." method="_on_health_component_defeat"]
+[connection signal="heavy_attack" from="RigPivot/Brid" to="." method="_on_rig_heavy_attack"]
+
+[editable path="RigPivot/Brid"]
+[editable path="RigPivot/Brid/AuxScene2"]
+[editable path="UserInterface"]

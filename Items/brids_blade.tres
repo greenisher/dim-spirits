@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://p3bt17y5phk3"]
+
+[ext_resource type="Texture2D" uid="uid://b24vt266wx580" path="res://Assets/brids_blade.png" id="1_6bmrj"]
+[ext_resource type="Script" uid="uid://dpsq82q1qanp6" path="res://Resources/Item.gd" id="1_xnlot"]
+
+[resource]
+script = ExtResource("1_xnlot")
+item_name = "Brid's Blade"
+item_id = "brids_blade"
+description = "A sword made for a customer that never collected. A stand-in."
+icon = ExtResource("1_6bmrj")
+damage = 10.0
+metadata/_custom_type_script = "uid://dpsq82q1qanp6"

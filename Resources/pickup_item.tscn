@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://b1vgaqafsaf87"]
+
+[ext_resource type="Script" uid="uid://dan0dsarscj75" path="res://Resources/PickupItem.gd" id="1_dab3o"]
+[ext_resource type="ArrayMesh" uid="uid://c3ucbuhg5d6pq" path="res://Assets/Items/Weapons/sword1.obj" id="2_pdoof"]
+[ext_resource type="Resource" uid="uid://p3bt17y5phk3" path="res://Items/brids_blade.tres" id="2_ts7ev"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ts7ev"]
+
+[node name="PickupItem" type="Node3D"]
+script = ExtResource("1_dab3o")
+item = ExtResource("2_ts7ev")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = ExtResource("2_pdoof")
+
+[node name="InteractionArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0.8102276, 0)
+shape = SubResource("SphereShape3D_ts7ev")
+
+[node name="InteractionPrompt" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.89816, 0)
+pixel_size = 0.01
+text = "Press Enter to pick up"

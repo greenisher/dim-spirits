@@ -1,0 +1,72 @@
+[gd_scene load_steps=8 format=3 uid="uid://dir7l7jkxceeq"]
+
+[ext_resource type="PackedScene" uid="uid://5dknym1exubj" path="res://Player/player.tscn" id="1_c6ubl"]
+[ext_resource type="PackedScene" uid="uid://dyfpdn424pog2" path="res://Assets/places/table.glb" id="2_q4jtc"]
+[ext_resource type="PackedScene" uid="uid://bxku5ow380k5h" path="res://Assets/places/candle.glb" id="3_qwrqw"]
+[ext_resource type="PackedScene" uid="uid://bv2a78my82mqp" path="res://Assets/places/chair.glb" id="4_8fc8y"]
+[ext_resource type="PackedScene" uid="uid://dipy50bww4n0v" path="res://Assets/places/gaybabyjail.glb" id="5_828jv"]
+[ext_resource type="PackedScene" uid="uid://whl0x3lc64qv" path="res://Assets/campfire.tscn" id="6_4fbqi"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_diyu6"]
+albedo_color = Color(0.6542321, 0.6542321, 0.654232, 1)
+
+[node name="UpperLutebergPrison" type="Node3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(15.386232, 0, 0, 0, 0.09792341, 0, 0, 0, 15.356796, 0.45828134, 0, 0)
+use_collision = true
+size = Vector3(1.0595703, 1, 1)
+material = SubResource("StandardMaterial3D_diyu6")
+
+[node name="Player" parent="." instance=ExtResource("1_c6ubl")]
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(-2.8073578e-07, -0.09792341, 0, 6.422486, -4.2803685e-09, 0, 0, 0, 15.356796, -7.5072293, 2.9319658, 0.30061883)
+use_collision = true
+size = Vector3(1, 1, 1.0410156)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(-2.8073578e-07, -0.09792341, 0, 6.422486, -4.2803685e-09, 0, 0, 0, 15.356796, 8.501852, 2.9319658, 0.30061883)
+use_collision = true
+size = Vector3(1, 1, 1.0410156)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="."]
+transform = Transform3D(1.227135e-14, 4.2803685e-09, 15.356796, 6.422486, -4.2803685e-09, 0, 2.8073578e-07, 0.09792341, -6.712669e-07, 0.41471025, 2.9319658, -7.7203135)
+use_collision = true
+size = Vector3(1, 1, 1.0571289)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="."]
+transform = Transform3D(1.227135e-14, 4.2803685e-09, 15.356796, 6.422486, -4.2803685e-09, 0, 2.8073578e-07, 0.09792341, -6.712669e-07, 4.9868884, 2.9319658, 7.1598983)
+use_collision = true
+size = Vector3(1, 1, 0.4423828)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="."]
+transform = Transform3D(1.227135e-14, 4.2803685e-09, 15.356796, 6.422486, -4.2803685e-09, 0, 2.8073578e-07, 0.09792341, -6.712669e-07, -4.6307473, 2.9319658, 7.112207)
+use_collision = true
+size = Vector3(1, 1, 0.44970703)
+
+[node name="table" parent="." instance=ExtResource("2_q4jtc")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -4.2261143, 0.09050298, 4.347072)
+
+[node name="candle" parent="table" instance=ExtResource("3_qwrqw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3056526, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="table/candle"]
+
+[node name="chair" parent="." instance=ExtResource("4_8fc8y")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -4.97225, 0.10414553, 1.5749605)
+
+[node name="gaybabyjail" parent="." instance=ExtResource("5_828jv")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -5.4347887, 0, -5.638326)
+
+[node name="gaybabyjail2" parent="." instance=ExtResource("5_828jv")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -1.5800538, 0, -5.638326)
+
+[node name="gaybabyjail3" parent="." instance=ExtResource("5_828jv")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 2.4148126, 0, -5.638326)
+
+[node name="gaybabyjail4" parent="." instance=ExtResource("5_828jv")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 6.3547482, 0, -5.638326)
+
+[node name="campfire" parent="." instance=ExtResource("6_4fbqi")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6.0223494, 0, 4.694858)

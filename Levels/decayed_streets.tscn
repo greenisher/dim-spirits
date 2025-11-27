@@ -1,0 +1,90 @@
+[gd_scene load_steps=10 format=3 uid="uid://cghu2f4ti2ff1"]
+
+[ext_resource type="PackedScene" uid="uid://bg6util2bcvfw" path="res://Npc/npc.tscn" id="1_jphcv"]
+[ext_resource type="PackedScene" uid="uid://xlbbf32muvqm" path="res://Assets/places/shop2.glb" id="2_veaw7"]
+[ext_resource type="PackedScene" uid="uid://btpwuqcy3ik2x" path="res://Assets/places/shop1.glb" id="3_vq7r1"]
+[ext_resource type="PackedScene" uid="uid://u2go48f0pmva" path="res://Assets/places/house1.glb" id="4_w35v7"]
+[ext_resource type="PackedScene" uid="uid://bcq8idf21a4c7" path="res://Assets/places/castle_wall.glb" id="5_xh7im"]
+[ext_resource type="PackedScene" uid="uid://bdorstmmpca8" path="res://Assets/places/broken_castle_wall.glb" id="6_yaclc"]
+[ext_resource type="PackedScene" uid="uid://c72em5ckdkbyp" path="res://Assets/places/flower1.glb" id="7_37qsf"]
+[ext_resource type="PackedScene" uid="uid://6dvw1434oej3" path="res://Assets/places/anvil.glb" id="8_487ia"]
+[ext_resource type="PackedScene" uid="uid://sx62hcipqyyo" path="res://Assets/places/lamp.glb" id="9_ftm03"]
+
+[node name="DecayedStreets" type="Node3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(37.617874, 0, 0, 0, 0.21882403, 0, 0, 0, 18.36429, 0, 0, 0.098566055)
+size = Vector3(1, 1, 2.6572266)
+
+[node name="npc" parent="." instance=ExtResource("1_jphcv")]
+
+[node name="shop2" parent="." instance=ExtResource("2_veaw7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.969914, 0, -16.559658)
+
+[node name="Guildhall" type="Node3D" parent="."]
+
+[node name="shop1" parent="Guildhall" instance=ExtResource("3_vq7r1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.158258, 0, 0.5422754)
+
+[node name="house1" parent="Guildhall" instance=ExtResource("4_w35v7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.468077, 0, 2.6698332)
+
+[node name="castle_wall" parent="." instance=ExtResource("5_xh7im")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1005363, 0, -22.33559)
+
+[node name="castle_wall9" parent="." instance=ExtResource("5_xh7im")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1005363, 0, 26.246151)
+
+[node name="castle_wall10" parent="." instance=ExtResource("5_xh7im")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3294773, 0, 26.246151)
+
+[node name="castle_wall11" parent="." instance=ExtResource("5_xh7im")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.51252, 0, 26.246151)
+
+[node name="castle_wall4" parent="." instance=ExtResource("5_xh7im")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 9.396234, 0.20796585, 25.091022)
+
+[node name="castle_wall5" parent="." instance=ExtResource("5_xh7im")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 18.178469, 0.20796585, 7.0862427)
+
+[node name="castle_wall6" parent="." instance=ExtResource("5_xh7im")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 16.565836, 0.20796585, -7.711754)
+
+[node name="castle_wall7" parent="." instance=ExtResource("5_xh7im")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14.317305, 0.20796585, -11.778303)
+
+[node name="castle_wall8" parent="." instance=ExtResource("5_xh7im")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -11.2429905, 0.20796585, 14.064859)
+
+[node name="castle_wall3" parent="." instance=ExtResource("5_xh7im")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.42536, 0, -22.33559)
+
+[node name="castle_wall2" parent="." instance=ExtResource("5_xh7im")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0249119, 0, -22.41476)
+
+[node name="broken_castle_wall" parent="." instance=ExtResource("6_yaclc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.779979, 0, -22.415142)
+
+[node name="flower1" parent="." instance=ExtResource("7_37qsf")]
+
+[node name="anvil" parent="." instance=ExtResource("8_487ia")]
+
+[node name="lamp" parent="." instance=ExtResource("9_ftm03")]
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 5.7266636, 1.588243, -20.02666)
+
+[node name="shop1" parent="." instance=ExtResource("3_vq7r1")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 11.164835, 0, 16.452581)
+
+[node name="shop3" parent="." instance=ExtResource("2_veaw7")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -10.885082, 0, -17.983889)
+
+[node name="shop5" parent="." instance=ExtResource("2_veaw7")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9.196161, 0, 20.274462)
+
+[node name="house1" parent="." instance=ExtResource("4_w35v7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.700699, 0, -5.627823)
+
+[node name="shop4" parent="." instance=ExtResource("3_vq7r1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.258063, 0, 7.036108)

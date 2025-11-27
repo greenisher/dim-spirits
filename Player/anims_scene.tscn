@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1ggpf6ogqb0t"]
+
+[ext_resource type="PackedScene" uid="uid://p4450uqyyita" path="res://Assets/Characters/Brid/cac-1762952054499.gltf" id="1_n6qto"]
+
+[node name="AuxScene" instance=ExtResource("1_n6qto")]
+
+[node name="Skeleton3D" parent="Node" index="0"]
+bones/0/position = Vector3(0.009364843, 0.8152714, 0.022640109)
+bones/0/rotation = Quaternion(0.027415084, 0.9980547, -0.031377766, 0.046376005)
+bones/1/rotation = Quaternion(0.019702053, 0.011595372, -0.02095696, 0.999519)
+bones/2/rotation = Quaternion(-0.01009114, 0.001487759, -0.013790194, 0.9998529)
+bones/3/rotation = Quaternion(-0.009868047, 0.0016795959, -0.013837313, 0.99985427)
+bones/4/rotation = Quaternion(-0.09778362, -0.001073788, -0.0038814659, 0.9951996)
+bones/5/rotation = Quaternion(0.06595851, 0.011929506, 0.001485279, 0.99775004)
+bones/6/rotation = Quaternion(0.5137812, -0.4086653, 0.682027, 0.32227442)
+bones/7/rotation = Quaternion(0.48064843, 0.14331234, 0.060387895, 0.8630134)
+bones/8/rotation = Quaternion(0.0011929714, -0.0069761365, 0.012679982, 0.9998946)
+bones/10/rotation = Quaternion(0.5361908, 0.384992, -0.6763155, 0.32692215)
+bones/11/rotation = Quaternion(0.41040432, -0.2271108, -0.08670518, 0.8789035)
+bones/12/rotation = Quaternion(0.006248655, -0.0021585694, -0.058045376, 0.9982921)
+bones/14/rotation = Quaternion(0.1320339, -0.160174, 0.96861595, 0.13672791)
+bones/15/rotation = Quaternion(0.45793542, -0.097949795, -0.009996314, 0.88351625)
+bones/16/rotation = Quaternion(-0.044252317, 0.7710046, -0.626399, 0.10591437)
+bones/17/rotation = Quaternion(0.3795974, 0.03111362, -0.018184396, 0.9244497)
+bones/18/rotation = Quaternion(-0.08895172, -0.02611922, 0.9952793, -0.028716326)
+bones/19/rotation = Quaternion(0.35700476, 0.17870861, -0.011694659, 0.9167738)
+bones/20/rotation = Quaternion(0.031897023, 0.75293356, -0.64730006, -0.11435227)
+bones/21/rotation = Quaternion(0.3988075, -0.031161025, 0.021812452, 0.9162456)
+
+[node name="mixamorigHead" parent="Node/Skeleton3D" index="0"]
+transform = Transform3D(-0.9981869, -0.04868839, 0.03539251, -0.04876605, 0.99880934, -0.0013343245, -0.035285413, -0.0030578375, -0.9993728, 0.0026135286, 1.5936962, 0.0098912865)
+
+[node name="mixamorigLeftToeBase" parent="Node/Skeleton3D" index="1"]
+transform = Transform3D(-0.83892417, 0.5278115, -0.1327448, -0.10719615, 0.078881264, 0.99110365, 0.5335872, 0.8456907, -0.009596169, 0.42836052, 0.0014669299, 0.24015766)
+
+[node name="mixamorigRightToeBase" parent="Node/Skeleton3D" index="2"]
+transform = Transform3D(-0.6973994, -0.70045215, 0.15166152, 0.09614534, 0.11826339, 0.98831666, -0.7102045, 0.70383286, -0.015131712, -0.38053772, 0.00087948143, 0.07443595)
