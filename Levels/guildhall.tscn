@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dgi3l5o6dhi4g"]
+[gd_scene load_steps=14 format=3 uid="uid://dgi3l5o6dhi4g"]
 
 [ext_resource type="PackedScene" uid="uid://5dknym1exubj" path="res://Player/player.tscn" id="1_6n0ck"]
 [ext_resource type="PackedScene" uid="uid://6dvw1434oej3" path="res://Assets/places/anvil.glb" id="2_ifd34"]
@@ -9,13 +9,14 @@
 [ext_resource type="PackedScene" uid="uid://5w2cnox2ycd" path="res://Assets/places/bookcase.glb" id="7_571ig"]
 [ext_resource type="PackedScene" uid="uid://bleged7jwjeg" path="res://Assets/places/chest.glb" id="8_se3hq"]
 [ext_resource type="PackedScene" uid="uid://bv2a78my82mqp" path="res://Assets/places/chair.glb" id="9_ce6bq"]
+[ext_resource type="Script" uid="uid://cba00ttmfpnef" path="res://Resources/SceneTransition.gd" id="10_ce6bq"]
+[ext_resource type="PackedScene" uid="uid://b1vgaqafsaf87" path="res://Resources/pickup_item.tscn" id="11_0mygs"]
+[ext_resource type="Resource" uid="uid://b6ym3rqngnw7p" path="res://Items/old_school_book.tres" id="12_571ig"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_53rc8"]
+size = Vector3(2.9404297, 2.003418, 1)
 
 [node name="Guildhall" type="Node3D"]
-
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(17.572746, 0, 0, 0, -0.014226794, 0, 0, 0, 13.852935, -0.22339821, -0.18153644, -0.058125973)
-use_collision = true
-size = Vector3(1, 1, 1.1948242)
 
 [node name="Player" parent="." instance=ExtResource("1_6n0ck")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.36216354, 0)
@@ -82,3 +83,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0095477, -0.19770181, -7.69
 
 [node name="chair" parent="." instance=ExtResource("9_ce6bq")]
 transform = Transform3D(0.62592345, 0, 0.77988446, 0, 1, 0, -0.77988446, 0, 0.62592345, -7.0412292, 0, 2.7043886)
+
+[node name="SpawnPoint" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 2.685449)
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.1726904)
+script = ExtResource("10_ce6bq")
+target_scene = "uid://cghu2f4ti2ff1"
+spawn_point_name = "GuildhallSpawnPoint"
+show_prompt = false
+auto_trigger = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.114746094, 0.8319583, 1.4755216)
+shape = SubResource("BoxShape3D_53rc8")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.013671875, -0.3885035, -0.099365234)
+use_collision = true
+size = Vector3(17.607422, 0.49572754, 17.0083)
+
+[node name="PickupItem" parent="." instance=ExtResource("11_0mygs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24077368, 0, -5.220664)
+item = ExtResource("12_571ig")

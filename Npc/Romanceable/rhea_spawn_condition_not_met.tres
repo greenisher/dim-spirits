@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="NPCSpawnCondition" load_steps=2 format=3 uid="uid://bdomhajpv6jj7"]
+
+[ext_resource type="Script" uid="uid://bqyh5hdyup2db" path="res://Resources/NPCSpawnCondition.gd" id="1_v7o1a"]
+
+[resource]
+script = ExtResource("1_v7o1a")
+condition_id = "rhea_not_met"
+story_flag = "met_rhea"
+invert_flag = true
+metadata/_custom_type_script = "uid://bqyh5hdyup2db"

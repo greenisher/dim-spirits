@@ -1,0 +1,54 @@
+[gd_resource type="Resource" script_class="DialogueTree" load_steps=10 format=3 uid="uid://dr426nlpd2jkm"]
+
+[ext_resource type="Script" uid="uid://x5v5p8f2l6te" path="res://Resources/DialogueNode.gd" id="1_jsw7i"]
+[ext_resource type="Script" uid="uid://i8ylbkrc5p0f" path="res://Resources/DialogueTree.gd" id="1_v6afw"]
+[ext_resource type="Script" uid="uid://b1ar50iy6yie3" path="res://Resources/DialogueResponse.gd" id="2_5altk"]
+
+[sub_resource type="Resource" id="Resource_5y3ns"]
+script = ExtResource("1_jsw7i")
+id = "start"
+text = "It's all over, isn't it? This is the end."
+auto_continue = true
+auto_continue_node_id = "1"
+metadata/_custom_type_script = "uid://x5v5p8f2l6te"
+
+[sub_resource type="Resource" id="Resource_f20wj"]
+script = ExtResource("1_jsw7i")
+id = "1"
+text = "Every time the final apprentice wakes they send idiot sacrifices up to try and put her down again. Nobody returns."
+auto_continue = true
+auto_continue_node_id = "2"
+metadata/_custom_type_script = "uid://x5v5p8f2l6te"
+
+[sub_resource type="Resource" id="Resource_xosxl"]
+script = ExtResource("1_jsw7i")
+id = "2"
+text = "This is a dead world. Who's left to take her down? You? Me? Don't make me laugh. "
+auto_continue = true
+auto_continue_node_id = "3"
+metadata/_custom_type_script = "uid://x5v5p8f2l6te"
+
+[sub_resource type="Resource" id="Resource_tglwg"]
+script = ExtResource("2_5altk")
+text = "What about the Knight Sol?"
+next_node_id = "4"
+metadata/_custom_type_script = "uid://b1ar50iy6yie3"
+
+[sub_resource type="Resource" id="Resource_82shh"]
+script = ExtResource("1_jsw7i")
+id = "3"
+text = "This place might be safe for now, but it won't stay that way. Mark my words, her horrible revenants will be down here soon enough."
+responses = Array[Resource]([SubResource("Resource_tglwg")])
+metadata/_custom_type_script = "uid://x5v5p8f2l6te"
+
+[sub_resource type="Resource" id="Resource_pl7c1"]
+script = ExtResource("1_jsw7i")
+id = "4"
+text = "Long gone. Just like we ought to be. If there was a way out of this cursed place. Lostberg, the remains of dead Luteberg. And our doom."
+end_dialogue = true
+metadata/_custom_type_script = "uid://x5v5p8f2l6te"
+
+[resource]
+script = ExtResource("1_v6afw")
+dialogue_nodes = Array[Resource]([SubResource("Resource_5y3ns"), SubResource("Resource_f20wj"), SubResource("Resource_xosxl"), SubResource("Resource_82shh"), SubResource("Resource_pl7c1")])
+metadata/_custom_type_script = "uid://i8ylbkrc5p0f"

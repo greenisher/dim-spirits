@@ -55,49 +55,119 @@ func add_response_button(response: Dictionary) -> void:
 	var button = Button.new()
 	button.custom_minimum_size = Vector2(400, 50)
 	
+	# Check if this is a continue button or end button
+	var is_continue = response.get("is_continue", false)
+	var is_end_button = response.get("is_end_button", false)
+	
 	# Build button text with effect indicators
 	var button_text = response.text
 	var effects = []
 	
-	# Check for affection change
-	if response.has("affection_change") and response.affection_change != 0:
-		var affection = response.affection_change
-		if affection > 0:
-			effects.append("♥+%d" % affection)
-		elif affection < 0:
-			effects.append("♥%d" % affection)
-	
-	# Check for reputation change
-	if response.has("reputation_change") and response.reputation_change != 0:
-		var reputation = response.reputation_change
-		if reputation > 0:
-			effects.append("★+%d" % reputation)
-		elif reputation < 0:
-			effects.append("★%d" % reputation)
-	
-	# Add effects to button text
-	if effects.size() > 0:
-		button_text += " [" + ", ".join(effects) + "]"
+	# Only show effect indicators for normal response buttons
+	if not is_continue and not is_end_button:
+		# Check for affection change
+		if response.has("affection_change") and response.affection_change != 0:
+			var affection = response.affection_change
+			if affection > 0:
+				effects.append("♥+%d" % affection)
+			elif affection < 0:
+				effects.append("♥%d" % affection)
+		
+		# Check for reputation change
+		if response.has("reputation_change") and response.reputation_change != 0:
+			var reputation = response.reputation_change
+			if reputation > 0:
+				effects.append("★+%d" % reputation)
+			elif reputation < 0:
+				effects.append("★%d" % reputation)
+		
+		# Add effects to button text
+		if effects.size() > 0:
+			button_text += " [" + ", ".join(effects) + "]"
 	
 	button.text = button_text
 	button.text_overrun_behavior = TextServer.OVERRUN_NO_TRIMMING
 	button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	
+	# Style the continue button differently
+	if is_continue:
+		var style_normal = StyleBoxFlat.new()
+		style_normal.bg_color = Color(0.3, 0.5, 0.7, 0.8)  # Blue-ish tint
+		style_normal.border_width_left = 2
+		style_normal.border_width_top = 2
+		style_normal.border_width_right = 2
+		style_normal.border_width_bottom = 2
+		style_normal.border_color = Color(0.5, 0.7, 0.9, 1.0)
+		style_normal.corner_radius_top_left = 5
+		style_normal.corner_radius_top_right = 5
+		style_normal.corner_radius_bottom_left = 5
+		style_normal.corner_radius_bottom_right = 5
+		
+		var style_hover = StyleBoxFlat.new()
+		style_hover.bg_color = Color(0.4, 0.6, 0.8, 0.9)  # Lighter blue on hover
+		style_hover.border_width_left = 2
+		style_hover.border_width_top = 2
+		style_hover.border_width_right = 2
+		style_hover.border_width_bottom = 2
+		style_hover.border_color = Color(0.6, 0.8, 1.0, 1.0)
+		style_hover.corner_radius_top_left = 5
+		style_hover.corner_radius_top_right = 5
+		style_hover.corner_radius_bottom_left = 5
+		style_hover.corner_radius_bottom_right = 5
+		
+		button.add_theme_stylebox_override("normal", style_normal)
+		button.add_theme_stylebox_override("hover", style_hover)
+		button.add_theme_stylebox_override("pressed", style_hover)
+		
+		button.alignment = HORIZONTAL_ALIGNMENT_CENTER
+		button.text = "> " + button.text
+	
+	# Style the end button differently (red-ish)
+	elif is_end_button:
+		var style_normal = StyleBoxFlat.new()
+		style_normal.bg_color = Color(0.6, 0.3, 0.3, 0.8)  # Red-ish tint
+		style_normal.border_width_left = 2
+		style_normal.border_width_top = 2
+		style_normal.border_width_right = 2
+		style_normal.border_width_bottom = 2
+		style_normal.border_color = Color(0.8, 0.4, 0.4, 1.0)
+		style_normal.corner_radius_top_left = 5
+		style_normal.corner_radius_top_right = 5
+		style_normal.corner_radius_bottom_left = 5
+		style_normal.corner_radius_bottom_right = 5
+		
+		var style_hover = StyleBoxFlat.new()
+		style_hover.bg_color = Color(0.7, 0.4, 0.4, 0.9)  # Lighter red on hover
+		style_hover.border_width_left = 2
+		style_hover.border_width_top = 2
+		style_hover.border_width_right = 2
+		style_hover.border_width_bottom = 2
+		style_hover.border_color = Color(0.9, 0.5, 0.5, 1.0)
+		style_hover.corner_radius_top_left = 5
+		style_hover.corner_radius_top_right = 5
+		style_hover.corner_radius_bottom_left = 5
+		style_hover.corner_radius_bottom_right = 5
+		
+		button.add_theme_stylebox_override("normal", style_normal)
+		button.add_theme_stylebox_override("hover", style_hover)
+		button.add_theme_stylebox_override("pressed", style_hover)
+		
+		button.alignment = HORIZONTAL_ALIGNMENT_CENTER
+		button.text = "X " + button.text
+	
 	# Make button process during pause
 	button.process_mode = Node.PROCESS_MODE_ALWAYS
 	
-	button.pressed.connect(_on_response_selected.bind(response.next_id))
+	button.pressed.connect(_on_response_selected.bind(response.next_id, response))
 	
 	if responses_container:
 		responses_container.add_child(button)
 
-func _on_response_selected(response_id: String) -> void:
-	print("Response selected: ", response_id)
-	
+func _on_response_selected(response_id: String, response_data: Dictionary = {}) -> void:
 	if not current_npc:
 		return
 	
-	var next_dialogue = current_npc.handle_response(response_id)
+	var next_dialogue = current_npc.handle_response(response_id, response_data)
 	
 	if next_dialogue.text.is_empty():
 		# End dialogue
@@ -120,7 +190,6 @@ func _on_response_selected(response_id: String) -> void:
 				add_response_button(response)
 
 func hide_dialogue() -> void:
-	print("Hiding dialogue")
 	visible = false
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	get_tree().paused = false

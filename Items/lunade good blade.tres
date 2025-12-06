@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://df0gu3o2ouqx7"]
+
+[ext_resource type="Script" uid="uid://dpsq82q1qanp6" path="res://Resources/Item.gd" id="1_3n3n7"]
+[ext_resource type="Texture2D" uid="uid://pwksfhp8077f" path="res://Assets/Items/Weapons/lunargoodblade_inventory.png" id="1_204k0"]
+
+[resource]
+script = ExtResource("1_3n3n7")
+item_name = "Lunar Goodblade"
+description = "A princess's bond."
+icon = ExtResource("1_204k0")
+damage = 20.0
+crit_chance_bonus = 5.0
+metadata/_custom_type_script = "uid://dpsq82q1qanp6"

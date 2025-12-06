@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="NPCSpawnCondition" load_steps=2 format=3 uid="uid://b3xk3i8ue45gi"]
+
+[ext_resource type="Script" uid="uid://bqyh5hdyup2db" path="res://Resources/NPCSpawnCondition.gd" id="1_62yp1"]
+
+[resource]
+script = ExtResource("1_62yp1")
+condition_id = "asumi_campfire_1"
+story_flag = "asumi_invited_once"
+metadata/_custom_type_script = "uid://bqyh5hdyup2db"

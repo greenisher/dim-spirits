@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://nkw14chgvyf1"
+path="res://.godot/imported/broken sword.obj-e6a46f9ca14d4be2cc51189f222403ff.mesh"
+
+[deps]
+
+files=["res://.godot/imported/broken sword.obj-e6a46f9ca14d4be2cc51189f222403ff.mesh"]
+
+source_file="res://Assets/Items/Misc/broken sword.obj"
+dest_files=["res://.godot/imported/broken sword.obj-e6a46f9ca14d4be2cc51189f222403ff.mesh", "res://.godot/imported/broken sword.obj-e6a46f9ca14d4be2cc51189f222403ff.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

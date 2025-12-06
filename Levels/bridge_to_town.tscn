@@ -1,16 +1,44 @@
-[gd_scene load_steps=7 format=3 uid="uid://0mhnnaih4xno"]
+[gd_scene load_steps=20 format=3 uid="uid://0mhnnaih4xno"]
 
 [ext_resource type="PackedScene" uid="uid://kfq8r71q4cjk" path="res://Assets/places/ropebridge_end.glb" id="1_wicbr"]
 [ext_resource type="PackedScene" uid="uid://bleged7jwjeg" path="res://Assets/places/chest.glb" id="2_mdr4y"]
 [ext_resource type="PackedScene" uid="uid://sx62hcipqyyo" path="res://Assets/places/lamp.glb" id="3_63qm2"]
 [ext_resource type="PackedScene" uid="uid://bxku5ow380k5h" path="res://Assets/places/candle.glb" id="4_qeend"]
 [ext_resource type="PackedScene" uid="uid://c72em5ckdkbyp" path="res://Assets/places/flower1.glb" id="5_pqjyg"]
-[ext_resource type="PackedScene" uid="uid://cft2se8jhfwmv" path="res://Assets/Characters/Skoll/skoll_anims.gltf" id="6_d0liq"]
+[ext_resource type="PackedScene" uid="uid://bbivfgl87ne2l" path="res://Npc/Romanceable/skoll.tscn" id="6_mdr4y"]
+[ext_resource type="Script" uid="uid://cba00ttmfpnef" path="res://Resources/SceneTransition.gd" id="7_63qm2"]
+[ext_resource type="PackedScene" uid="uid://bcq8idf21a4c7" path="res://Assets/places/castle_wall.glb" id="8_63qm2"]
+[ext_resource type="PackedScene" uid="uid://5dknym1exubj" path="res://Player/player.tscn" id="9_qeend"]
+[ext_resource type="PackedScene" uid="uid://b1vgaqafsaf87" path="res://Resources/pickup_item.tscn" id="10_d0liq"]
+[ext_resource type="Resource" uid="uid://bb6m882ax8bir" path="res://Items/apprentices_pride.tres" id="11_1a1gc"]
+[ext_resource type="Script" uid="uid://be71aibbwx7t3" path="res://Resources/ConditionalNPCSpawner.gd" id="12_1a1gc"]
+[ext_resource type="Resource" uid="uid://f3ulgwncfb3b" path="res://Npc/Romanceable/skoll_spawn_condition_not_met.tres" id="13_o0wno"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wicbr"]
+albedo_color = Color(0.13973007, 0.3260352, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qeend"]
+size = Vector3(1, 1, 1.3960571)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pqjyg"]
+size = Vector3(1, 1, 7.3079834)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_63qm2"]
+
+[sub_resource type="Sky" id="Sky_qeend"]
+sky_material = SubResource("ProceduralSkyMaterial_63qm2")
+
+[sub_resource type="Environment" id="Environment_pqjyg"]
+background_mode = 2
+sky = SubResource("Sky_qeend")
+ambient_light_color = Color(0.68307734, 0.6830774, 0.68307734, 1)
 
 [node name="BridgeToTown" type="Node3D"]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(14.195772, 0, 0, 0, 0.13341141, 0, 0, 0, 14.326629, 0, 0, -3.0532835)
+use_collision = true
+material = SubResource("StandardMaterial3D_wicbr")
 
 [node name="ropebridge_end" parent="." instance=ExtResource("1_wicbr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.841866, 5.8035536)
@@ -33,5 +61,82 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1701474, 0, 3.1719713)
 [node name="flower3" parent="." instance=ExtResource("5_pqjyg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8688183, 0, 2.446146)
 
-[node name="AuxScene" parent="." instance=ExtResource("6_d0liq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.705302, 1.1882823, 0)
+[node name="Skoll" parent="." instance=ExtResource("6_mdr4y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0699778, 0.14793563, 1.2147388)
+visible = false
+
+[node name="SpawnPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.850439)
+
+[node name="WallsSpawnPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.4595132)
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.0962863)
+script = ExtResource("7_63qm2")
+target_scene = "uid://dbe5gbjo8d0rv"
+spawn_point_name = "WallsSpawnPoint"
+show_prompt = false
+auto_trigger = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 1.0965409)
+shape = SubResource("BoxShape3D_qeend")
+
+[node name="Area3D2" type="Area3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -6.847114, 0, -10.24426)
+script = ExtResource("7_63qm2")
+target_scene = "uid://blg7t05v1iwm8"
+spawn_point_name = "LeaveBridgeSpawn"
+show_prompt = false
+auto_trigger = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.7404108, 6.893694)
+shape = SubResource("BoxShape3D_pqjyg")
+
+[node name="castle_wall" parent="." instance=ExtResource("8_63qm2")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5.354375, 0, 2.1458092)
+
+[node name="castle_wall2" parent="." instance=ExtResource("8_63qm2")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5.354375, 0, -2.0216255)
+
+[node name="castle_wall3" parent="." instance=ExtResource("8_63qm2")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5.354375, 0, -6.1916676)
+
+[node name="castle_wall4" parent="." instance=ExtResource("8_63qm2")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5.354375, 0, -10.310939)
+
+[node name="castle_wall5" parent="." instance=ExtResource("8_63qm2")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 8.833459, 0, 2.1458092)
+
+[node name="castle_wall6" parent="." instance=ExtResource("8_63qm2")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 8.833459, 0, -2.0216255)
+
+[node name="castle_wall7" parent="." instance=ExtResource("8_63qm2")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 8.833459, 0, -6.1916676)
+
+[node name="castle_wall8" parent="." instance=ExtResource("8_63qm2")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 8.833459, 0, -10.310939)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_pqjyg")
+
+[node name="Player" parent="." instance=ExtResource("9_qeend")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.940404)
+
+[node name="SkollBridgeSpawn" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.85603, 0, 1.7261333)
+
+[node name="PickupItem" parent="." instance=ExtResource("10_d0liq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7466965, 0, 2.6290665)
+item = ExtResource("11_1a1gc")
+
+[node name="ConditionalNPCSpawner" type="Node3D" parent="."]
+script = ExtResource("12_1a1gc")
+npc_scene = ExtResource("6_mdr4y")
+spawner_id = "Skoll_first_meeting"
+npc_id = "Skoll"
+default_npc_name = "Skoll"
+spawn_conditions = Array[Resource]([ExtResource("13_o0wno")])
+metadata/_custom_type_script = "uid://be71aibbwx7t3"

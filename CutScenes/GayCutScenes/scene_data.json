@@ -1,0 +1,467 @@
+{
+  "romanceOptions": [
+	{
+	  "id": "rhea",
+	  "name": "Rhea",
+	  "description": "A legendary half-elven hero with a mysterious past."
+	},
+	{
+	  "id": "asumi",
+	  "name": "Asumi",
+	  "description": "A priestess who still believes in the old gods. What else does she have?"
+	},
+	{
+	  "id": "skoll",
+	  "name": "Skoll",
+	  "description": "Who knows what lies beneath her hardened armour?"
+	}
+  ],
+  "scenes": [
+	{
+	  "id": "rhea_scene_1",
+	  "combination": ["rhea"],
+	  "sceneNumber": 1,
+	  "title": "rhea_solo_1",
+	  "description": "Rhea teaches Brid about camping",
+	  "dialogueFile": "res://CutScenes/GayCutScenes/rhea_solo_1.dialogue",
+	  "backgroundImage": "images/rhea_date_1.png",
+	  "musicTrack": "music/peaceful_night.ogg",
+	  "characters": [
+		{
+		  "characterId": "rhea",
+		  "position": "right",
+		  "expression": "happy"
+		}
+	  ]
+	},
+	{
+	  "id": "rhea_scene_2",
+	  "combination": ["rhea"],
+	  "sceneNumber": 2,
+	  "title": "rhea_solo_2",
+	  "description": "Rhea shares a story from her past as the fire crackles",
+	  "dialogueFile": "res://CutScenes/GayCutScenes/rhea_solo_2.dialogue",
+	  "backgroundImage": "images/rhea_solo_2.png",
+	  "musicTrack": "music/memory_lane.ogg",
+	  "characters": [
+		{
+		  "characterId": "rhea",
+		  "position": "right",
+		  "expression": "happy"
+		}
+	  ]
+	},
+	{
+	  "id": "rhea_scene_3",
+	  "combination": ["rhea"],
+	  "sceneNumber": 3,
+	  "title": "rhea_solo_3",
+	  "description": "Rhea feels at home",
+	  "dialogueFile": "res://CutScenes/GayCutScenes/rhea_solo_3.dialogue",
+	  "backgroundImage": "images/rhea_solo_3.png",
+	  "musicTrack": "music/intimate_moment.ogg",
+	  "characters": [
+		{
+		  "characterId": "rhea",
+		  "position": "center",
+		  "expression": "Loving"
+		}
+	  ],
+	  "specialEffects": ["soft_glow", "firefly_particles"]
+	},
+	{
+	  "id": "asumi_scene_1",
+	  "combination": ["asumi"],
+	  "sceneNumber": 1,
+	  "title": "asumi_solo_1",
+	  "description": "Asumi offers to heal your wounds",
+	  "dialogueFile": "res://CutScenes/GayCutScenes/asumi_solo_1.dialogue",
+	  "backgroundImage": "images/asumi_solo_1.png",
+	  "musicTrack": "music/calm_tea.ogg",
+	  "characters": [
+		{
+		  "characterId": "asumi",
+		  "position": "left",
+		  "expression": "happy"
+		}
+	  ]
+	},
+	{
+	  "id": "asumi_scene_2",
+	  "combination": ["asumi"],
+	  "sceneNumber": 2,
+	  "title": "asumi_solo_2",
+	  "description": "Asumi asks if you trust her.",
+	  "dialogueFile": "res://CutScenes/GayCutScenes/asumi_solo_2.dialogue",
+	  "backgroundImage": "images/asumi_solo_2.png",
+	  "musicTrack": "music/training_theme.ogg",
+	  "characters": [
+		{
+		  "characterId": "asumi",
+		  "position": "center",
+		  "expression": "loving"
+		}
+	  ]
+	},
+	{
+	  "id": "asumi_scene_3",
+	  "combination": ["asumi"],
+	  "sceneNumber": 3,
+	  "title": "asumi_solo_3",
+	  "description": "Brid and Asumi have more in common than she thought.",
+	  "dialogueFile": "res://CutScenes/GayCutScenes/asumi_solo_3.dialogue",
+	  "backgroundImage": "images/asumi_solo_3.png",
+	  "musicTrack": "music/watchful_night.ogg",
+	  "characters": [
+		{
+		  "characterId": "asumi",
+		  "position": "right",
+		  "expression": "loving"
+		}
+	  ],
+	  "specialEffects": ["sunrise_transition"]
+	},
+	{
+	  "id": "skoll_scene_1",
+	  "combination": ["skoll"],
+	  "sceneNumber": 1,
+	  "title": "skoll_solo_1",
+	  "description": "Brid tries to gain Skoll's trust",
+	  "dialogueFile": "res://CutScenes/GayCutScenes/skoll_solo_1.dialogue",
+	  "backgroundImage": "images/skoll_solo_1.png",
+	  "musicTrack": "music/hunter_tales.ogg",
+	  "characters": [
+		{
+		  "characterId": "skoll",
+		  "position": "left",
+		  "expression": "neutral"
+		}
+	  ]
+	},
+	{
+	  "id": "skoll_scene_2",
+	  "combination": ["skoll"],
+	  "sceneNumber": 2,
+	  "title": "skoll_solo_2",
+	  "description": "Skoll talks about her armour.",
+	  "dialogueFile": "res://CutScenes/GayCutScenes/skoll_solo_2.dialogue",
+	  "backgroundImage": "images/skoll_solo_2.png",
+	  "musicTrack": "music/pack_bond.ogg",
+	  "characters": [
+		{
+		  "characterId": "skoll",
+		  "position": "center",
+		  "expression": "sad"
+		}
+	  ]
+	},
+	{
+	  "id": "skoll_scene_3",
+	  "combination": ["skoll"],
+	  "sceneNumber": 3,
+	  "title": "skoll_solo_3",
+	  "description": "Brid and Skoll affirm their feelings.",
+	  "dialogueFile": "res://CutScenes/GayCutScenes/skoll_solo_3.dialogue",
+	  "backgroundImage": "images/skoll_solo_3.png",
+	  "musicTrack": "music/moonlit_hunt.ogg",
+	  "characters": [
+		{
+		  "characterId": "skoll",
+		  "position": "right",
+		  "expression": "loving"
+		}
+	  ],
+	  "specialEffects": ["moonlight", "forest_ambience"]
+	},
+	{
+	  "id": "rhea_asumi_scene_1",
+	  "combination": ["asumi", "rhea"],
+	  "sceneNumber": 1,
+	  "title": "rhea_asumi_1",
+	  "description": "Rhea and Asumi debate personhood",
+	  "dialogueFile": "res://CutScenes/GayCutScenes/rhea_asumi_1.dialogue",
+	  "backgroundImage": "images/rhea_asumi_1.png",
+	  "musicTrack": "music/debate_theme.ogg",
+	  "characters": [
+		{
+		  "characterId": "rhea",
+		  "position": "right",
+		  "expression": "angry"
+		},
+		{
+		  "characterId": "asumi",
+		  "position": "left",
+		  "expression": "happy"
+		}
+	  ]
+	},
+	{
+	  "id": "rhea_asumi_scene_2",
+	  "combination": ["asumi", "rhea"],
+	  "sceneNumber": 2,
+	  "title": "rhea_asumi_2",
+	  "description": "Rhea and Asumi share a memory.",
+	  "dialogueFile": "res://CutScenes/GayCutScenes/rhea_asumi_2.dialogue",
+	  "backgroundImage": "images/rhea_asumi_2.png",
+	  "musicTrack": "music/harmony.ogg",
+	  "characters": [
+		{
+		  "characterId": "rhea",
+		  "position": "right",
+		  "expression": "sad"
+		},
+		{
+		  "characterId": "asumi",
+		  "position": "left",
+		  "expression": "loving"
+		}
+	  ]
+	},
+	{
+	  "id": "rhea_asumi_scene_3",
+	  "combination": ["asumi", "rhea"],
+	  "sceneNumber": 3,
+	  "title": "rhea_asumi_3",
+	  "description": "Brid, Rhea and Asumi talk about their shared journey and what might come next.",
+	  "dialogueFile": "res://CutScenes/GayCutScenes/rhea_asumi_3.dialogue",
+	  "backgroundImage": "images/rhea_asumi_3.png",
+	  "musicTrack": "music/bonding.ogg",
+	  "characters": [
+		{
+		  "characterId": "rhea",
+		  "position": "right",
+		  "expression": "happy"
+		},
+		{
+		  "characterId": "asumi",
+		  "position": "left",
+		  "expression": "loving"
+		}
+	  ],
+	  "specialEffects": ["warm_glow"]
+	},
+	{
+	  "id": "rhea_skoll_scene_1",
+	  "combination": ["rhea", "skoll"],
+	  "sceneNumber": 1,
+	  "title": "rhea_skoll_1",
+	  "description": "Two of Brid's acquaintances seem to know each other.",
+	  "dialogueFile": "res://CutScenes/GayCutScenes/rhea_skoll_1.dialogue",
+	  "backgroundImage": "images/rhea_skoll_1.png",
+	  "musicTrack": "music/wilderness.ogg",
+	  "characters": [
+		{
+		  "characterId": "rhea",
+		  "position": "right",
+		  "expression": "angry"
+		},
+		{
+		  "characterId": "skoll",
+		  "position": "left",
+		  "expression": "angry"
+		}
+	  ]
+	},
+	{
+	  "id": "rhea_skoll_scene_2",
+	  "combination": ["rhea", "skoll"],
+	  "sceneNumber": 2,
+	  "title": "rhea_skoll_2",
+	  "description": "Rhea and Skoll have a conversation about the ways they have failed each other.",
+	  "dialogueFile": "res://CutScenes/GayCutScenes/rhea_skoll_2.dialogue",
+	  "backgroundImage": "images/rhea_skoll_2.png",
+	  "musicTrack": "music/balance.ogg",
+	  "characters": [
+		{
+		  "characterId": "rhea",
+		  "position": "right",
+		  "expression": "sad"
+		},
+		{
+		  "characterId": "skoll",
+		  "position": "left",
+		  "expression": "sad"
+		}
+	  ]
+	},
+	{
+	  "id": "rhea_skoll_scene_3",
+	  "combination": ["rhea", "skoll"],
+	  "sceneNumber": 3,
+	  "title": "rhea_skoll_3",
+	  "description": "The three of you resolve to move on with your grief",
+	  "dialogueFile": "res://CutScenes/GayCutScenes/rhea_skoll_3.dialogue",
+	  "backgroundImage": "images/rhea_skoll_3.png",
+	  "musicTrack": "music/ancient_bonds.ogg",
+	  "characters": [
+		{
+		  "characterId": "rhea",
+		  "position": "right",
+		  "expression": "sad"
+		},
+		{
+		  "characterId": "skoll",
+		  "position": "left",
+		  "expression": "neutral"
+		}
+	  ],
+	  "specialEffects": ["magical_aura", "firefly_particles"]
+	},
+	{
+	  "id": "asumi_skoll_scene_1",
+	  "combination": ["asumi", "skoll"],
+	  "sceneNumber": 1,
+	  "title": "asumi_skoll_1",
+	  "description": "These two definitely know each other.",
+	  "dialogueFile": "res://CutScenes/GayCutScenes/asumi_skoll_1.dialogue",
+	  "backgroundImage": "images/asumi_skoll_1.png",
+	  "musicTrack": "music/warrior_bond.ogg",
+	  "characters": [
+		{
+		  "characterId": "asumi",
+		  "position": "happy",
+		  "expression": "respectful"
+		},
+		{
+		  "characterId": "skoll",
+		  "position": "fear",
+		  "expression": "acknowledging"
+		}
+	  ]
+	},
+	{
+	  "id": "asumi_skoll_scene_2",
+	  "combination": ["asumi", "skoll"],
+	  "sceneNumber": 2,
+	  "title": "asumi_skoll_2",
+	  "description": "Skoll admits a wrong.",
+	  "dialogueFile": "res://CutScenes/GayCutScenes/asumi_skoll_2.dialogue",
+	  "backgroundImage": "images/asumi_skoll_2.png",
+	  "musicTrack": "music/strength_united.ogg",
+	  "characters": [
+		{
+		  "characterId": "asumi",
+		  "position": "left",
+		  "expression": "sad"
+		},
+		{
+		  "characterId": "skoll",
+		  "position": "right",
+		  "expression": "sad"
+		}
+	  ]
+	},
+	{
+	  "id": "asumi_skoll_scene_3",
+	  "combination": ["asumi", "skoll"],
+	  "sceneNumber": 3,
+	  "title": "asumi_skoll_3",
+	  "description": "Skoll, Brid and Asumi build a bond together.",
+	  "dialogueFile": "res://CutScenes/GayCutScenes/asumi_skoll_3.dialogue",
+	  "backgroundImage": "images/asumi_skoll_3.png",
+	  "musicTrack": "music/guardian_theme.ogg",
+	  "characters": [
+		{
+		  "characterId": "asumi",
+		  "position": "left",
+		  "expression": "loving"
+		},
+		{
+		  "characterId": "skoll",
+		  "position": "right",
+		  "expression": "loving"
+		}
+	  ],
+	  "specialEffects": ["protective_aura"]
+	},
+	{
+	  "id": "rhea_asumi_skoll_scene_1",
+	  "combination": ["asumi", "rhea", "skoll"],
+	  "sceneNumber": 1,
+	  "title": "all_three_1",
+	  "description": "These adventurers definitely share a past.",
+	  "dialogueFile": "res://CutScenes/GayCutScenes/all_three_1.dialogue",
+	  "backgroundImage": "images/all_three_1.png",
+	  "musicTrack": "music/family_warmth.ogg",
+	  "characters": [
+		{
+		  "characterId": "rhea",
+		  "position": "right",
+		  "expression": "annoyed"
+		},
+		{
+		  "characterId": "asumi",
+		  "position": "left",
+		  "expression": "sad"
+		},
+		{
+		  "characterId": "skoll",
+		  "position": "center",
+		  "expression": "annoyed"
+		}
+	  ]
+	},
+	{
+	  "id": "rhea_asumi_skoll_scene_2",
+	  "combination": ["asumi", "rhea", "skoll"],
+	  "sceneNumber": 2,
+	  "title": "all_three_2",
+	  "description": "The three adventurers drink to the past and share memories with Brid.",
+	  "dialogueFile": "res://CutScenes/GayCutScenes/all_three_2.dialogue",
+	  "backgroundImage": "images/all_three_2.png",
+	  "musicTrack": "music/divergent_paths.ogg",
+	  "characters": [
+		{
+		  "characterId": "rhea",
+		  "position": "right",
+		  "expression": "neutral"
+		},
+		{
+		  "characterId": "asumi",
+		  "position": "left",
+		  "expression": "sad"
+		},
+		{
+		  "characterId": "skoll",
+		  "position": "center",
+		  "expression": "neutral"
+		}
+	  ]
+	},
+	{
+	  "id": "rhea_asumi_skoll_scene_3",
+	  "combination": ["asumi", "rhea", "skoll"],
+	  "sceneNumber": 3,
+	  "title": "all_three_3",
+	  "description": "The four of you look tot he future",
+	  "dialogueFile": "res://CutScenes/GayCutScenes/all_three_3.dialogue",
+	  "backgroundImage": "images/all_three_3.png",
+	  "musicTrack": "music/eternal_bond.ogg",
+	  "characters": [
+		{
+		  "characterId": "rhea",
+		  "position": "right",
+		  "expression": "loving"
+		},
+		{
+		  "characterId": "asumi",
+		  "position": "left",
+		  "expression": "loving"
+		},
+		{
+		  "characterId": "skoll",
+		  "position": "center",
+		  "expression": "loving"
+		}
+	  ],
+	  "specialEffects": ["bond_magic", "firefly_particles", "warm_glow"]
+	}
+  ],
+  "sceneMetadata": {
+	"totalScenesPerCombination": 3,
+	"soloScenes": 9,
+	"duoScenes": 9,
+	"trioScenes": 3,
+	"totalScenes": 21
+  }
+}

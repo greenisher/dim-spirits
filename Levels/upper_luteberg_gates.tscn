@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cvfcptswtpwk4"]
+[gd_scene load_steps=13 format=3 uid="uid://cvfcptswtpwk4"]
 
 [ext_resource type="PackedScene" uid="uid://5dknym1exubj" path="res://Player/player.tscn" id="1_661ah"]
 [ext_resource type="PackedScene" uid="uid://bcq8idf21a4c7" path="res://Assets/places/castle_wall.glb" id="2_4o1u0"]
@@ -7,9 +7,13 @@
 [ext_resource type="PackedScene" uid="uid://xlbbf32muvqm" path="res://Assets/places/shop2.glb" id="5_vc7mu"]
 [ext_resource type="PackedScene" uid="uid://cjs3b2g7vkb7p" path="res://Assets/places/old church.glb" id="6_hjl7u"]
 [ext_resource type="PackedScene" uid="uid://btpwuqcy3ik2x" path="res://Assets/places/shop1.glb" id="7_g7b8x"]
+[ext_resource type="Script" uid="uid://cba00ttmfpnef" path="res://Resources/SceneTransition.gd" id="8_4o1u0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l2o4q"]
 albedo_color = Color(0.8745338, 0.6785388, 0.3206041, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kvxpw"]
+size = Vector3(1.3706055, 1, 0.29211426)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rxv4q"]
 albedo_color = Color(0.423439, 0.29591185, 0.0053698034, 1)
@@ -41,55 +45,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.2395782, 0, -6.227436)
 [node name="castle_wall4" parent="." instance=ExtResource("2_4o1u0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.1303477, 0, -6.227436)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="."]
-transform = Transform3D(2.092651, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.6702547, 3.438611, -8.013446)
-use_collision = true
-size = Vector3(1.5371094, 1, 0.76171875)
-material = SubResource("StandardMaterial3D_rxv4q")
-
-[node name="CSGBox3D3" type="CSGBox3D" parent="."]
-transform = Transform3D(2.092651, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.6702547, 0.3758502, -8.013446)
-use_collision = true
-size = Vector3(1.5371094, 1, 0.76171875)
-material = SubResource("StandardMaterial3D_rxv4q")
-
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6230971, 1.9157392, -8.033367)
-radius = 0.125
-height = 3.046875
-material = SubResource("StandardMaterial3D_3xnns")
-
-[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12456685, 1.9157392, -8.033367)
-radius = 0.125
-height = 3.046875
-material = SubResource("StandardMaterial3D_3xnns")
-
-[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.34245622, 1.9157392, -8.033367)
-radius = 0.125
-height = 3.046875
-material = SubResource("StandardMaterial3D_3xnns")
-
-[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.82590204, 1.9157392, -8.033367)
-radius = 0.125
-height = 3.046875
-material = SubResource("StandardMaterial3D_3xnns")
-
-[node name="CSGCylinder3D5" type="CSGCylinder3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.296452, 1.9157392, -8.033367)
-radius = 0.125
-height = 3.046875
-material = SubResource("StandardMaterial3D_3xnns")
-
-[node name="CSGCylinder3D6" type="CSGCylinder3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7849355, 1.9157392, -8.033367)
-use_collision = true
-radius = 0.125
-height = 3.046875
-material = SubResource("StandardMaterial3D_3xnns")
-
 [node name="flower1" parent="." instance=ExtResource("3_kvxpw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7867298, 0, -6.750717)
 
@@ -110,3 +65,84 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.357566, 0, 0)
 
 [node name="shop4" parent="." instance=ExtResource("5_vc7mu")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -11.125803, -0.35204506, 8.405199)
+
+[node name="SpawnPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5443716, 5.121319)
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1543097, 0, 7.4382257)
+script = ExtResource("8_4o1u0")
+target_scene = "uid://cghu2f4ti2ff1"
+spawn_point_name = "GatesSpawnPoint"
+show_prompt = false
+auto_trigger = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -0.9265137, 0, 0.5154419)
+shape = SubResource("BoxShape3D_kvxpw")
+
+[node name="Area3D2" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.029778, 1.0594025, -9.038921)
+script = ExtResource("8_4o1u0")
+target_scene = "uid://b5jkymgaw5l1s"
+show_prompt = false
+auto_trigger = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -0.9265137, 0, 0.5154419)
+shape = SubResource("BoxShape3D_kvxpw")
+
+[node name="UpperLutebergSpawnPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.816473)
+
+[node name="GateToUpperLuteberg" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.502453, 5.736038, 6.9228477)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="GateToUpperLuteberg"]
+transform = Transform3D(2.092651, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -24.8322, -2.2974272, -14.936294)
+use_collision = true
+size = Vector3(1.5371094, 1, 0.76171875)
+material = SubResource("StandardMaterial3D_rxv4q")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="GateToUpperLuteberg"]
+transform = Transform3D(2.092651, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -24.8322, -5.360188, -14.936294)
+use_collision = true
+size = Vector3(1.5371094, 1, 0.76171875)
+material = SubResource("StandardMaterial3D_rxv4q")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="GateToUpperLuteberg"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.12555, -3.8202991, -14.956215)
+radius = 0.125
+height = 3.046875
+material = SubResource("StandardMaterial3D_3xnns")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="GateToUpperLuteberg"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.62702, -3.8202991, -14.956215)
+radius = 0.125
+height = 3.046875
+material = SubResource("StandardMaterial3D_3xnns")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="GateToUpperLuteberg"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.159996, -3.8202991, -14.956215)
+radius = 0.125
+height = 3.046875
+material = SubResource("StandardMaterial3D_3xnns")
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="GateToUpperLuteberg"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.67655, -3.8202991, -14.956215)
+radius = 0.125
+height = 3.046875
+material = SubResource("StandardMaterial3D_3xnns")
+
+[node name="CSGCylinder3D5" type="CSGCylinder3D" parent="GateToUpperLuteberg"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.206001, -3.8202991, -14.956215)
+radius = 0.125
+height = 3.046875
+material = SubResource("StandardMaterial3D_3xnns")
+
+[node name="CSGCylinder3D6" type="CSGCylinder3D" parent="GateToUpperLuteberg"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.717518, -3.8202991, -14.956215)
+use_collision = true
+radius = 0.125
+height = 3.046875
+material = SubResource("StandardMaterial3D_3xnns")

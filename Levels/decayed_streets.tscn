@@ -1,6 +1,5 @@
-[gd_scene load_steps=10 format=3 uid="uid://cghu2f4ti2ff1"]
+[gd_scene load_steps=14 format=3 uid="uid://cghu2f4ti2ff1"]
 
-[ext_resource type="PackedScene" uid="uid://bg6util2bcvfw" path="res://Npc/npc.tscn" id="1_jphcv"]
 [ext_resource type="PackedScene" uid="uid://xlbbf32muvqm" path="res://Assets/places/shop2.glb" id="2_veaw7"]
 [ext_resource type="PackedScene" uid="uid://btpwuqcy3ik2x" path="res://Assets/places/shop1.glb" id="3_vq7r1"]
 [ext_resource type="PackedScene" uid="uid://u2go48f0pmva" path="res://Assets/places/house1.glb" id="4_w35v7"]
@@ -9,14 +8,19 @@
 [ext_resource type="PackedScene" uid="uid://c72em5ckdkbyp" path="res://Assets/places/flower1.glb" id="7_37qsf"]
 [ext_resource type="PackedScene" uid="uid://6dvw1434oej3" path="res://Assets/places/anvil.glb" id="8_487ia"]
 [ext_resource type="PackedScene" uid="uid://sx62hcipqyyo" path="res://Assets/places/lamp.glb" id="9_ftm03"]
+[ext_resource type="PackedScene" uid="uid://5dknym1exubj" path="res://Player/player.tscn" id="9_veaw7"]
+[ext_resource type="Script" uid="uid://cba00ttmfpnef" path="res://Resources/SceneTransition.gd" id="10_vq7r1"]
+[ext_resource type="PackedScene" uid="uid://b1vgaqafsaf87" path="res://Resources/pickup_item.tscn" id="11_w35v7"]
+[ext_resource type="Resource" uid="uid://trr481wi4np7" path="res://Items/old_lute.tres" id="12_xh7im"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w35v7"]
 
 [node name="DecayedStreets" type="Node3D"]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(37.617874, 0, 0, 0, 0.21882403, 0, 0, 0, 18.36429, 0, 0, 0.098566055)
+use_collision = true
 size = Vector3(1, 1, 2.6572266)
-
-[node name="npc" parent="." instance=ExtResource("1_jphcv")]
 
 [node name="shop2" parent="." instance=ExtResource("2_veaw7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.969914, 0, -16.559658)
@@ -66,10 +70,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0249119, 0, -22.41476)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.779979, 0, -22.415142)
 
 [node name="flower1" parent="." instance=ExtResource("7_37qsf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.028318, 0, 0.05155945)
 
 [node name="anvil" parent="." instance=ExtResource("8_487ia")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7259903, 0, 5.154293)
 
 [node name="lamp" parent="." instance=ExtResource("9_ftm03")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1823587, 0, 0)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 5.7266636, 1.588243, -20.02666)
@@ -81,10 +88,74 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 11.1
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -10.885082, 0, -17.983889)
 
 [node name="shop5" parent="." instance=ExtResource("2_veaw7")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9.196161, 0, 20.274462)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -12.446501, 0, 17.279394)
 
 [node name="house1" parent="." instance=ExtResource("4_w35v7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.700699, 0, -5.627823)
 
 [node name="shop4" parent="." instance=ExtResource("3_vq7r1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.258063, 0, 7.036108)
+
+[node name="Player" parent="." instance=ExtResource("9_veaw7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3326893, -20.591753)
+
+[node name="SpawnPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20.882164)
+
+[node name="GuildhallSpawnPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4900208, 0, 2.827057)
+
+[node name="GatesSpawnPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4900208, 0, 20.558147)
+
+[node name="MilitiaSpawnPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6639385, 0, 18.226711)
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -24.248951)
+script = ExtResource("10_vq7r1")
+target_scene = "uid://dbe5gbjo8d0rv"
+spawn_point_name = "DecayedStreetsSpawnPoint"
+show_prompt = false
+auto_trigger = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 1.1621094, 0, -0.9033356)
+shape = SubResource("BoxShape3D_w35v7")
+
+[node name="Area3D2" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.335266, 0, 2.2043543)
+script = ExtResource("10_vq7r1")
+target_scene = "uid://dgi3l5o6dhi4g"
+prompt_text = "Press Enter to Enter the Guildhall"
+auto_trigger = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 1.1621094, 0, -0.9033356)
+shape = SubResource("BoxShape3D_w35v7")
+
+[node name="Area3D4" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.215269, -0.09013176, 20.815147)
+script = ExtResource("10_vq7r1")
+target_scene = "uid://lw6omj8k6eam"
+prompt_text = "Press Enter to Enter the Guildhall"
+auto_trigger = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D4"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 1.1621094, 0, -0.9033356)
+shape = SubResource("BoxShape3D_w35v7")
+
+[node name="Area3D3" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14960146, 0, 27.12126)
+script = ExtResource("10_vq7r1")
+target_scene = "uid://cvfcptswtpwk4"
+prompt_text = "Press Enter to Enter the Guildhall"
+auto_trigger = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D3"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 1.1621094, 0, -0.9033356)
+shape = SubResource("BoxShape3D_w35v7")
+
+[node name="PickupItem" parent="." instance=ExtResource("11_w35v7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.906561, 0, -8.420469)
+item = ExtResource("12_xh7im")

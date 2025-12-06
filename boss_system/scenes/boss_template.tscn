@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://ccj1iohe3yarb"]
+
+[ext_resource type="Script" uid="uid://d2scjme107xh4" path="res://boss_system/bosses/boss_fallen_knight.gd" id="1_boss"]
+[ext_resource type="Script" uid="uid://3xbxkmft83ig" path="res://boss_system/boss_rig.gd" id="2_rig"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_main"]
+radius = 0.6
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_attack"]
+size = Vector3(2.5, 2, 3)
+
+[node name="BossFallenKnight" type="CharacterBody3D" groups=["Boss"]]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_boss")
+boss_name = "Fallen Knight"
+max_health = 400.0
+poise = 80.0
+xp_reward = 500
+walk_speed = 2.0
+run_speed = 4.0
+preferred_distance = 2.5
+attack_cooldown = 1.5
+aggression = 0.5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_main")
+
+[node name="BossRig" type="Node3D" parent="."]
+script = ExtResource("2_rig")
+
+[node name="AttackArea" type="ShapeCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1.5)
+shape = SubResource("BoxShape3D_attack")
+target_position = Vector3(0, 0, 0)
+collision_mask = 2
+collide_with_areas = true
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_desired_distance = 0.5
+target_desired_distance = 0.5
+avoidance_enabled = true
+radius = 0.8

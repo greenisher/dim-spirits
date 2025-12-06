@@ -30,7 +30,6 @@ enum ArmorSlot {
 @export var icon: Texture2D
 @export var item_type: ItemType = ItemType.WEAPON
 @export var max_stack_size: int = 1
-@export var value: int = 10  # Sell/buy price
 
 # Weapon stats
 @export_group("Weapon Stats")
@@ -106,7 +105,5 @@ func get_tooltip_text() -> String:
 	if intelligence_bonus != 0:
 		tooltip += "Intelligence: %+d\n" % intelligence_bonus
 	
-	# Add value at the bottom
-	tooltip += "\n[color=gold]Value: %d gold[/color]" % value
 	
 	return tooltip

@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://dig2rewdo5ol"]
+
+[ext_resource type="Script" uid="uid://bh78ej8dmhxn2" path="res://Autoload/TransitionScene.gd" id="1"]
+
+[node name="TransitionScreen" type="CanvasLayer"]
+layer = 100
+script = ExtResource("1")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.5251013, 0.5251013, 0.5251013, 0)

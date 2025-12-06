@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://do8b4ksge11yh"]
+
+[ext_resource type="Texture2D" uid="uid://7e2biutnsjtp" path="res://Assets/Items/Misc/discardedbondringInventory.png" id="1_d08yf"]
+[ext_resource type="Script" uid="uid://dpsq82q1qanp6" path="res://Resources/Item.gd" id="1_jrtyj"]
+
+[resource]
+script = ExtResource("1_jrtyj")
+item_name = "Discarded Bond Ring"
+description = "This ring was forged to offer protection to a beloved knight. Judging from the tarnish, it was discarded when the sun quit Luteberg, but a spark of protective warmth remains."
+icon = ExtResource("1_d08yf")
+item_type = 1
+armor_slot = 3
+max_health_bonus = 25.0
+metadata/_custom_type_script = "uid://dpsq82q1qanp6"

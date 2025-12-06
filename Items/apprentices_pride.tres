@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://bb6m882ax8bir"]
+
+[ext_resource type="Script" uid="uid://dpsq82q1qanp6" path="res://Resources/Item.gd" id="1_alema"]
+[ext_resource type="Texture2D" uid="uid://d2h76k5y7s70p" path="res://Assets/Items/Weapons/apprenticesprideinventory.png" id="1_qejhp"]
+
+[resource]
+script = ExtResource("1_alema")
+item_name = "Apprentice's Pride"
+description = "A sword in a familiar shape, that of a sigil commonly carved into desks and textbooks. 
+
+The first creation Sól and Isadira worked on together in their school days. The impractical genesis of an enduring affection."
+icon = ExtResource("1_qejhp")
+damage = 2.0
+attack_speed = 5.0
+crit_chance_bonus = 5.0
+intelligence_bonus = -1
+metadata/_custom_type_script = "uid://dpsq82q1qanp6"

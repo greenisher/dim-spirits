@@ -14,7 +14,7 @@ class_name SceneTransition
 @export var auto_trigger: bool = false  # Trigger on enter (no button press)
 
 @export_group("Effects")
-@export var fade_duration: float = 0.5
+@export var fade_duration: float = 0.0  # Set to 0 by default (no fade)
 
 # ==================== STATE ====================
 
@@ -53,7 +53,8 @@ func _process(_delta: float) -> void:
 # ==================== COLLISION DETECTION ====================
 
 func _on_body_entered(body: Node3D) -> void:
-	if body.is_in_group("player"):
+	# Support both "Player" and "player" groups
+	if body.is_in_group("Player") or body.is_in_group("player"):
 		player_in_area = true
 		
 		if show_prompt:
@@ -63,7 +64,8 @@ func _on_body_entered(body: Node3D) -> void:
 			trigger_transition()
 
 func _on_body_exited(body: Node3D) -> void:
-	if body.is_in_group("player"):
+	# Support both "Player" and "player" groups
+	if body.is_in_group("Player") or body.is_in_group("player"):
 		player_in_area = false
 		
 		if show_prompt:
@@ -93,46 +95,31 @@ func trigger_transition() -> void:
 	if show_prompt:
 		hide_interaction_prompt()
 	
-	# Perform transition
-	if fade_duration > 0:
-		await fade_out()
+	# Optional: Fade out BEFORE scene change
+	if fade_duration > 0 and has_node("/root/TransitionScreen"):
+		# Use persistent TransitionScreen autoload if available
+		await TransitionScreen.fade_out(fade_duration)
 	
-	# Use SceneManager for proper data persistence
+	# Change scene
+	# NOTE: After this line, this node will be DESTROYED as part of the old scene!
+	# DO NOT PUT ANY CODE AFTER THIS that uses this node!
 	SceneManager.change_scene(target_scene, spawn_point_name)
 	
-	if fade_duration > 0:
-		await get_tree().create_timer(0.1).timeout
-		await fade_in()
-	
-	# Re-enable if not one-shot
-	if not one_shot:
-		can_trigger = true
+	# ❌ NOTHING AFTER SceneManager.change_scene() ❌
+	# The node is destroyed when the scene changes!
+	# Any code here will cause "get_tree() is null" crash!
 
 # ==================== VISUAL EFFECTS ====================
 
 func show_interaction_prompt() -> void:
 	"""Show interaction prompt to player"""
 	# TODO: Connect to your UI system
-	# Example: UI.show_prompt(prompt_text)
 	print("Interaction available: ", prompt_text)
 
 func hide_interaction_prompt() -> void:
 	"""Hide interaction prompt"""
 	# TODO: Connect to your UI system
-	# Example: UI.hide_prompt()
 	pass
-
-func fade_out() -> void:
-	"""Fade screen to black"""
-	# TODO: Implement fade effect
-	# Example: TransitionEffect.fade_out(fade_duration)
-	await get_tree().create_timer(fade_duration).timeout
-
-func fade_in() -> void:
-	"""Fade screen from black"""
-	# TODO: Implement fade effect
-	# Example: TransitionEffect.fade_in(fade_duration)
-	await get_tree().create_timer(fade_duration).timeout
 
 # ==================== DEBUG ====================
 

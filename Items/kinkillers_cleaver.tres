@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://yt04bmmskqny"]
+
+[ext_resource type="Texture2D" uid="uid://bj4a14jyavmmd" path="res://Assets/Items/Weapons/kinkillercleaverinventory.png" id="1_3k6nu"]
+[ext_resource type="Script" uid="uid://dpsq82q1qanp6" path="res://Resources/Item.gd" id="1_vl8p6"]
+
+[resource]
+script = ExtResource("1_vl8p6")
+item_name = "Kinkiller's Cleaver"
+description = "The blade of a natural born butcher, sharpened with care by someone who loved them.
+
+It feels natural in your hands, like home."
+icon = ExtResource("1_3k6nu")
+damage = 15.0
+crit_chance_bonus = 5.0
+metadata/_custom_type_script = "uid://dpsq82q1qanp6"

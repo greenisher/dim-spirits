@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://kuhoxd2oklfg"]
+[gd_scene load_steps=14 format=3 uid="uid://kuhoxd2oklfg"]
 
 [ext_resource type="PackedScene" uid="uid://5dknym1exubj" path="res://Player/player.tscn" id="1_bnbg7"]
 [ext_resource type="PackedScene" uid="uid://1f1hmustdry1" path="res://Assets/places/bench.glb" id="2_xuaut"]
@@ -7,9 +7,16 @@
 [ext_resource type="PackedScene" uid="uid://bv2a78my82mqp" path="res://Assets/places/chair.glb" id="5_pd7x5"]
 [ext_resource type="PackedScene" uid="uid://dyfpdn424pog2" path="res://Assets/places/table.glb" id="6_fc41j"]
 [ext_resource type="PackedScene" uid="uid://5w2cnox2ycd" path="res://Assets/places/bookcase.glb" id="7_4lwwx"]
+[ext_resource type="Script" uid="uid://cba00ttmfpnef" path="res://Resources/SceneTransition.gd" id="8_xuaut"]
+[ext_resource type="Script" uid="uid://be71aibbwx7t3" path="res://Resources/ConditionalNPCSpawner.gd" id="9_pd7x5"]
+[ext_resource type="PackedScene" uid="uid://dwuju2p25jw0h" path="res://Npc/Romanceable/asumi.tscn" id="10_fc41j"]
+[ext_resource type="Resource" uid="uid://caqymra8oai6x" path="res://Npc/Romanceable/asumi_spawn_condition_campfire_2.tres" id="11_4lwwx"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_422nk"]
 albedo_color = Color(0.5489626, 0.5489626, 0.54896253, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dogml"]
+size = Vector3(9.98584, 3.0528564, 1)
 
 [node name="UpperLutebergWizTower" type="Node3D"]
 
@@ -21,6 +28,7 @@ height = 12.0
 material = SubResource("StandardMaterial3D_422nk")
 
 [node name="Player" parent="." instance=ExtResource("1_bnbg7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.34625983, 6.767562)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(0.3695298, 0, 0.36172217, 0, 0.99999994, 0, -0.14337568, 0, 0.9322859, -9.969909, 2.9218748, 4.168258)
@@ -84,3 +92,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2826447, 0)
 
 [node name="bookcase" parent="." instance=ExtResource("7_4lwwx")]
 transform = Transform3D(0.9034999, 0, 0.42858833, 0, 1, 0, -0.42858833, 0, 0.9034999, 8.410114, 1.4621665, -2.5697024)
+
+[node name="Area3D" type="Area3D" parent="."]
+script = ExtResource("8_xuaut")
+target_scene = "uid://b5jkymgaw5l1s"
+spawn_point_name = "WizardSpawnPoint"
+show_prompt = false
+auto_trigger = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(0.9300461, 0, -0.36744288, 0, 1, 0, 0.36744288, 0, 0.9300461, -3.937865, 1.9071903, 9.955269)
+shape = SubResource("BoxShape3D_dogml")
+
+[node name="SpawnPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3695326, 0, 7.270357)
+
+[node name="ConditionalNPCSpawner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.9213796, 0, -3.9463515)
+script = ExtResource("9_pd7x5")
+npc_scene = ExtResource("10_fc41j")
+spawner_id = "Asumi_third_meeting"
+npc_id = "Asumi"
+default_npc_name = "Asumi"
+spawn_conditions = Array[Resource]([ExtResource("11_4lwwx")])
+metadata/_custom_type_script = "uid://be71aibbwx7t3"

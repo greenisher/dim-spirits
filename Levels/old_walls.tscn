@@ -1,17 +1,26 @@
-[gd_scene load_steps=6 format=3 uid="uid://dbe5gbjo8d0rv"]
+[gd_scene load_steps=12 format=3 uid="uid://dbe5gbjo8d0rv"]
 
 [ext_resource type="PackedScene" uid="uid://kfq8r71q4cjk" path="res://Assets/places/ropebridge_end.glb" id="1_nyv5g"]
 [ext_resource type="PackedScene" uid="uid://bdorstmmpca8" path="res://Assets/places/broken_castle_wall.glb" id="2_8pv5v"]
 [ext_resource type="PackedScene" uid="uid://bcq8idf21a4c7" path="res://Assets/places/castle_wall.glb" id="3_0lx47"]
 [ext_resource type="PackedScene" uid="uid://c72em5ckdkbyp" path="res://Assets/places/flower1.glb" id="4_o2yan"]
+[ext_resource type="PackedScene" uid="uid://beqgsxribgm3x" path="res://Npc/Romanceable/rhea.tscn" id="5_0lx47"]
+[ext_resource type="Script" uid="uid://cba00ttmfpnef" path="res://Resources/SceneTransition.gd" id="6_o2yan"]
+[ext_resource type="PackedScene" uid="uid://5dknym1exubj" path="res://Player/player.tscn" id="7_o2yan"]
+[ext_resource type="Script" uid="uid://be71aibbwx7t3" path="res://Resources/ConditionalNPCSpawner.gd" id="8_rh8u7"]
+[ext_resource type="Resource" uid="uid://bdomhajpv6jj7" path="res://Npc/Romanceable/rhea_spawn_condition_not_met.tres" id="9_8ha7b"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rh8u7"]
 albedo_color = Color(0, 0.18272229, 0.0005442837, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0lx47"]
+size = Vector3(4.050308, 2.2130127, 1)
 
 [node name="OldWalls" type="Node3D"]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(12.5667305, 0, 0, 0, 0.42051739, 0, 0, 0, 12.071966, 0, 0, 0)
+use_collision = true
 material = SubResource("StandardMaterial3D_rh8u7")
 
 [node name="ropebridge_end" parent="." instance=ExtResource("1_nyv5g")]
@@ -24,7 +33,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.227764, 0, -4.0138516)
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 4.0820146, -0.033027172, -7.618423)
 
 [node name="castle_wall" parent="." instance=ExtResource("3_0lx47")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.0255833)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -4.456752, 0, -3.5165277)
+
+[node name="castle_wall6" parent="." instance=ExtResource("3_0lx47")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -4.456752, 0, 0.63938713)
+
+[node name="castle_wall7" parent="." instance=ExtResource("3_0lx47")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -4.456752, 0, 4.1296496)
 
 [node name="castle_wall2" parent="." instance=ExtResource("3_0lx47")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 7.867903, 0, -5.0056844)
@@ -61,3 +76,49 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5456443, 0, -0.7684071)
 
 [node name="flower8" parent="." instance=ExtResource("4_o2yan")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4695408, 0, -0.7684071)
+
+[node name="Rhea" parent="." instance=ExtResource("5_0lx47")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1090794, 0, 0.43143082)
+visible = false
+
+[node name="SpawnPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.983902)
+
+[node name="DecayedStreetsSpawnPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6499376, 0, -2.9756646)
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.7027617)
+script = ExtResource("6_o2yan")
+target_scene = "uid://0mhnnaih4xno"
+spawn_point_name = "WallsSpawnPoint"
+show_prompt = false
+auto_trigger = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.024505615, 0.60650635, 0.4304657)
+shape = SubResource("BoxShape3D_0lx47")
+
+[node name="Area3D2" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.686824)
+script = ExtResource("6_o2yan")
+target_scene = "uid://cghu2f4ti2ff1"
+show_prompt = false
+auto_trigger = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.090254664, 1.3258879, 0.13392735)
+shape = SubResource("BoxShape3D_0lx47")
+
+[node name="Player" parent="." instance=ExtResource("7_o2yan")]
+transform = Transform3D(-0.9950069, 0, 0.09980595, 0, 1, 0, -0.09980595, 0, -0.9950069, 0, 0.2657771, 3.6257381)
+
+[node name="ConditionalNPCSpawner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2257051, 0, 0.18461323)
+script = ExtResource("8_rh8u7")
+npc_scene = ExtResource("5_0lx47")
+spawner_id = "Rhea_first_meeting"
+npc_id = "Rhea"
+default_npc_name = "Rhea"
+spawn_conditions = Array[Resource]([ExtResource("9_8ha7b")])
+metadata/_custom_type_script = "uid://be71aibbwx7t3"

@@ -1,10 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://dht5utreptnxw"]
+[gd_scene load_steps=14 format=3 uid="uid://dht5utreptnxw"]
 
 [ext_resource type="PackedScene" uid="uid://c72em5ckdkbyp" path="res://Assets/places/flower1.glb" id="1_ci454"]
 [ext_resource type="PackedScene" uid="uid://whl0x3lc64qv" path="res://Assets/campfire.tscn" id="2_u4mmj"]
+[ext_resource type="PackedScene" uid="uid://5dknym1exubj" path="res://Player/player.tscn" id="3_2hx5r"]
+[ext_resource type="Script" uid="uid://cba00ttmfpnef" path="res://Resources/SceneTransition.gd" id="4_1ldnv"]
+[ext_resource type="Script" uid="uid://be71aibbwx7t3" path="res://Resources/ConditionalNPCSpawner.gd" id="5_cq6qe"]
+[ext_resource type="PackedScene" uid="uid://beqgsxribgm3x" path="res://Npc/Romanceable/rhea.tscn" id="6_5nfy5"]
+[ext_resource type="Resource" uid="uid://i1wckcne60m1" path="res://Npc/Romanceable/rhea_spawn_condition_campfire_3.tres" id="7_scy2j"]
+[ext_resource type="PackedScene" uid="uid://bbivfgl87ne2l" path="res://Npc/Romanceable/skoll.tscn" id="8_ng02b"]
+[ext_resource type="Resource" uid="uid://bpc41hs6kvghg" path="res://Npc/Romanceable/skoll_spawn_condition_campfire_3.tres" id="9_1un10"]
+[ext_resource type="PackedScene" uid="uid://dwuju2p25jw0h" path="res://Npc/Romanceable/asumi.tscn" id="10_81k7p"]
+[ext_resource type="Resource" uid="uid://cfn61nla65441" path="res://Npc/Romanceable/asumi_spawn_condition_campfire_3.tres" id="11_rcdby"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2hx5r"]
 albedo_color = Color(0.42789227, 0.46489543, 0.061890386, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p8kxe"]
+size = Vector3(3.978302, 1, 2.0219116)
 
 [node name="PeacefulField" type="Node3D"]
 
@@ -92,3 +104,52 @@ transform = Transform3D(2.9438825, 0, 0, 0, 0.29415056, 0, 0, 0, 0.66279507, 0, 
 
 [node name="CSGBox3D16" type="CSGBox3D" parent="CSGCombiner3D"]
 transform = Transform3D(2.9438825, 0, 0, 0, 0.29415056, 0, 0, 0, 0.66279507, 0, 1.646114, -6.8193)
+
+[node name="SpawnPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.40764332, 5.728821)
+
+[node name="Player" parent="." instance=ExtResource("3_2hx5r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28180218, 4.2895894)
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.68531275, -3.4006906)
+script = ExtResource("4_1ldnv")
+target_scene = "uid://bw0fth51bqv4u"
+show_prompt = false
+auto_trigger = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.019088745, 0, 0.5109558)
+shape = SubResource("BoxShape3D_p8kxe")
+
+[node name="ConditionalNPCSpawner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.154931, 0, -0.33018064)
+script = ExtResource("5_cq6qe")
+npc_scene = ExtResource("6_5nfy5")
+spawner_id = "Rhea_last_meeting"
+npc_id = "Rhea"
+default_npc_name = "Rhea"
+spawn_conditions = Array[Resource]([ExtResource("7_scy2j")])
+metadata/_custom_type_script = "uid://be71aibbwx7t3"
+
+[node name="ConditionalNPCSpawner2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.3042936, 0, -0.33018064)
+script = ExtResource("5_cq6qe")
+npc_scene = ExtResource("8_ng02b")
+spawner_id = "Skoll_last_meeting"
+npc_id = "Skoll"
+default_npc_name = "Skoll"
+spawn_conditions = Array[Resource]([ExtResource("9_1un10")])
+metadata/_custom_type_script = "uid://be71aibbwx7t3"
+
+[node name="ConditionalNPCSpawner3" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.424096, 0, 3.0521245)
+script = ExtResource("5_cq6qe")
+npc_scene = ExtResource("10_81k7p")
+spawner_id = "Asumi_final_meeting"
+npc_id = "Asumi"
+default_npc_name = "Asumi"
+spawn_conditions = Array[Resource]([ExtResource("11_rcdby")])
+metadata/_custom_type_script = "uid://be71aibbwx7t3"

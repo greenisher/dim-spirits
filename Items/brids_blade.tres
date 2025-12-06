@@ -7,7 +7,9 @@
 script = ExtResource("1_xnlot")
 item_name = "Brid's Blade"
 item_id = "brids_blade"
-description = "A sword made for a customer that never collected. A stand-in."
+description = "A sword made for a customer that never collected. A stand-in.
+
+When the last of the legendary smiths, Berard of Lost Luteberg, found a child soaked in blood, instinct rushed him to take her in even as common sense cautioned him not to. He raised her as his own, even knowing that one day she might turn on him."
 icon = ExtResource("1_6bmrj")
 damage = 10.0
 metadata/_custom_type_script = "uid://dpsq82q1qanp6"

@@ -1,8 +1,13 @@
-[gd_scene load_steps=11 format=4 uid="uid://t35vxvoxksvh"]
+[gd_scene load_steps=13 format=4 uid="uid://t35vxvoxksvh"]
 
 [ext_resource type="PackedScene" uid="uid://bg6util2bcvfw" path="res://Npc/npc.tscn" id="1_3c6g8"]
 [ext_resource type="Texture2D" uid="uid://b4immg6cy1vea" path="res://Assets/Characters/Berard/Berard_0.png" id="2_0damo"]
 [ext_resource type="Script" uid="uid://g0p6i47es7j3" path="res://Npc/berard.gd" id="2_pp3y8"]
+[ext_resource type="Script" uid="uid://i8ylbkrc5p0f" path="res://Resources/DialogueTree.gd" id="3_pp3y8"]
+
+[sub_resource type="Resource" id="Resource_es5rl"]
+script = ExtResource("3_pp3y8")
+metadata/_custom_type_script = "uid://i8ylbkrc5p0f"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_syj0d"]
 resource_name = "material_0"
@@ -751,6 +756,7 @@ _data = {
 script = ExtResource("2_pp3y8")
 npc_name = "Berard"
 greeting = "Hi, kid."
+dialogue_tree = SubResource("Resource_es5rl")
 faction = "Berard"
 play_greeting_animation = false
 nearby_idle_animation = "BreathingIdle"

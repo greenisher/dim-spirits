@@ -1,6 +1,5 @@
 extends Control
 
-# Reference existing nodes from your scene
 @onready var inventory_grid: GridContainer = $MarginContainer/VBoxContainer/HeldItems/InventoryGrid
 @onready var equip_button: Button = $MarginContainer/VBoxContainer/HBoxContainer/EquipButton
 @onready var use_button: Button = $MarginContainer/VBoxContainer/HBoxContainer/UseButton
@@ -64,12 +63,10 @@ func refresh_inventory() -> void:
 func create_item_slot(item: Item, quantity: int) -> bool:
 	print(">>> create_item_slot START for: ", item.item_name)
 	
-	# Create simple button instead of complex structure
 	var btn = Button.new()
 	btn.custom_minimum_size = Vector2(80, 80)
 	btn.text = item.item_name
 	
-	# Connect events
 	btn.pressed.connect(func(): print("CLICKED: ", item.item_name))
 	btn.mouse_entered.connect(func(): print("HOVER: ", item.item_name))
 	btn.mouse_exited.connect(func(): print("UNHOVER"))

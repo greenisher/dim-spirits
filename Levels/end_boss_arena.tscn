@@ -15,7 +15,10 @@ height = 5.0
 material = SubResource("StandardMaterial3D_h78ic")
 
 [node name="Player" parent="." instance=ExtResource("1_1gnq4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.554449, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.063828, 3.03834, 0)
 
 [node name="chair" parent="." instance=ExtResource("2_3io0x")]
 transform = Transform3D(1.8753172, 0, -0.6951152, 0, 2, 0, 0.6951152, 0, 1.8753172, -11.642439, 2.5937579, -3.3208323)
+
+[node name="SpawnPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.149685, 3.5132458, 0.9416027)

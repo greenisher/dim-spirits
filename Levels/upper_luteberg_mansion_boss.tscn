@@ -1,9 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://c3sy8pfeyht0l"]
+[gd_scene load_steps=5 format=3 uid="uid://c3sy8pfeyht0l"]
 
 [ext_resource type="PackedScene" uid="uid://5dknym1exubj" path="res://Player/player.tscn" id="1_al1tm"]
+[ext_resource type="Script" uid="uid://cba00ttmfpnef" path="res://Resources/SceneTransition.gd" id="2_jb0pl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_al1tm"]
 albedo_color = Color(0.7176471, 0.42352942, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oep2l"]
+size = Vector3(6.303528, 1.7335205, 1)
 
 [node name="UpperLutebergMansionBoss" type="Node3D"]
 
@@ -34,3 +38,30 @@ use_collision = true
 size = Vector3(0.3491211, 1, 1.6213379)
 
 [node name="Player" parent="." instance=ExtResource("1_al1tm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.242907, 0.16205072, 7.6196136)
+
+[node name="SpawnPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.966598, 0, 8.423311)
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.275946, 0.5695095, 12.017823)
+script = ExtResource("2_jb0pl")
+target_scene = "uid://dmipsm5o8aqml"
+spawn_point_name = "BossSpawnPoint"
+show_prompt = false
+auto_trigger = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.020690918, 0.36676025, 0)
+shape = SubResource("BoxShape3D_oep2l")
+
+[node name="Area3D2" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3602905, 0.5695095, -28.064434)
+script = ExtResource("2_jb0pl")
+target_scene = "uid://dht5utreptnxw"
+show_prompt = false
+auto_trigger = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9177127, 0.36676025, 0.5013275)
+shape = SubResource("BoxShape3D_oep2l")

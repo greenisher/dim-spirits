@@ -1,14 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://b76s3y8sm8f4k"]
+[gd_scene load_steps=8 format=3 uid="uid://b76s3y8sm8f4k"]
 
 [ext_resource type="PackedScene" uid="uid://5dknym1exubj" path="res://Player/player.tscn" id="1_xpqq4"]
 [ext_resource type="PackedScene" uid="uid://sx62hcipqyyo" path="res://Assets/places/lamp.glb" id="2_acqfi"]
 [ext_resource type="PackedScene" uid="uid://bxku5ow380k5h" path="res://Assets/places/candle.glb" id="3_2a5ry"]
+[ext_resource type="Script" uid="uid://cba00ttmfpnef" path="res://Resources/SceneTransition.gd" id="4_acqfi"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a5k71"]
 albedo_color = Color(0.7797495, 0.5531658, 0.35240272, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s78ts"]
 albedo_color = Color(0.46229059, 0.46229059, 0.46229059, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2a5ry"]
+size = Vector3(2.7497559, 2.3634033, 1)
 
 [node name="MilitiaBoss" type="Node3D"]
 
@@ -18,6 +22,7 @@ use_collision = true
 material = SubResource("StandardMaterial3D_a5k71")
 
 [node name="Player" parent="." instance=ExtResource("1_xpqq4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.16351056, 8.175441)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.381982, 2.1103547, 0.016479492)
@@ -80,3 +85,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.788405, 0, 9.71241)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.58218193, 0)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="lamp4/candle"]
+
+[node name="SpawnPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2048297, 8.592296)
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6084323, 9.968979)
+script = ExtResource("4_acqfi")
+target_scene = "uid://lw6omj8k6eam"
+spawn_point_name = "MilitiaBossSpawnPoint"
+show_prompt = false
+auto_trigger = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0485757, 0.6529331, 0.60121536)
+shape = SubResource("BoxShape3D_2a5ry")

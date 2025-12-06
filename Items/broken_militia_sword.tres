@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://bbemkhha4lsdq"]
+
+[ext_resource type="Script" uid="uid://dpsq82q1qanp6" path="res://Resources/Item.gd" id="1_vfhye"]
+[ext_resource type="Texture2D" uid="uid://ci87g6ajit22p" path="res://Assets/Items/Misc/brokenswordinventory.png" id="1_vk4pg"]
+
+[resource]
+script = ExtResource("1_vfhye")
+item_name = "Broken Militia Blade"
+description = "To the idealist, a symbol of the bravery once held in every ordinary citizen of Luteberg. To those pragmatists of Lostberg, scrap to melt down and shore up their eroding defenses.
+
+The militia of Luteberg was once made up of part-time soldiers volunteering their spare time. Untrained townsfolk. Most were lost in the first wave of destruction. The rest were rallied by the surviving Smith apprentice, Isadora, and helped buy time for others to escape to Lostberg, the abandoned place below the city."
+icon = ExtResource("1_vk4pg")
+damage = 0.5
+metadata/_custom_type_script = "uid://dpsq82q1qanp6"

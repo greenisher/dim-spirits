@@ -1,7 +1,6 @@
 extends Node
 class_name MagicSystem
 
-## Magic system component - handles spell casting, targeting, and cooldowns
 
 signal spell_cast(spell: Spell)
 signal spell_failed(reason: String)
@@ -14,6 +13,10 @@ signal equipped_spell_changed(slot: int, spell: Spell)
 @export var stats: CharacterStats
 @export var cast_origin: Node3D  # Where spells spawn from (usually hand/staff)
 @export var max_equipped_spells: int = 4
+
+@export_group("Starting Spells")
+@export var starting_spells: Array[Spell] = []  # Configure in editor
+@export var auto_equip_starting_spells: bool = true
 
 # ==================== STATE ====================
 
@@ -28,11 +31,50 @@ var pending_spell: Spell = null
 var locked_target: Node3D = null
 var potential_targets: Array[Node3D] = []
 
+# Track if starting spells have been equipped
+var starting_spells_equipped: bool = false
+
 # ==================== INITIALIZATION ====================
 
 func _ready() -> void:
 	# Initialize equipped spells array
 	equipped_spells.resize(max_equipped_spells)
+	
+	# Equip starting spells
+	if auto_equip_starting_spells and not starting_spells_equipped:
+		equip_starting_spells()
+
+func equip_starting_spells() -> void:
+	"""Equip all configured starting spells"""
+	if starting_spells_equipped:
+		print("Starting spells already equipped")
+		return
+	
+	print("=== Equipping Starting Spells ===")
+	
+	# Method 1: Use starting_spells array from editor
+	for i in range(starting_spells.size()):
+		if i >= max_equipped_spells:
+			break
+		
+		var spell = starting_spells[i]
+		if spell:
+			equip_spell(spell, i)
+			print("✅ Equipped starting spell: %s to slot %d" % [spell.spell_name, i])
+	
+	# Method 2: Hardcoded default spell (fallback)
+	# If no spells in array, try loading a default spell
+	if starting_spells.is_empty():
+		var default_spell = load("res://spells/FireBolt.tres")  # Change this path!
+		if default_spell:
+			equip_spell(default_spell, 0)
+			print("✅ Equipped default spell: FireBolt to slot 0")
+		else:
+			print("⚠️ No starting spells configured and default spell not found")
+			print("   Set starting_spells in the Inspector or update the path in MagicSystem.gd")
+	
+	starting_spells_equipped = true
+	print("=== Starting Spells Setup Complete ===")
 
 func _process(delta: float) -> void:
 	# Update cooldowns

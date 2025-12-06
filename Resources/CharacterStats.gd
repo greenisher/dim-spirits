@@ -61,6 +61,9 @@ var spirit := Ability.new(5.0, 30.0)        # Max mana & mana regen (NEW!)
 func get_damage_modifier() -> float:
 	return strength.get_modifier()
 
+func get_spell_damage_modifier() -> float:
+	return intelligence.get_modifier()
+
 func get_crit_chance() -> float:
 	return agility.get_modifier()
 

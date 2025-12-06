@@ -1,85 +1,125 @@
-[gd_scene format=3 uid="uid://dmipsm5o8aqml"]
+[gd_scene load_steps=4 format=3 uid="uid://dmipsm5o8aqml"]
+
+[ext_resource type="Script" uid="uid://cba00ttmfpnef" path="res://Resources/SceneTransition.gd" id="1_q8m0c"]
+[ext_resource type="PackedScene" uid="uid://5dknym1exubj" path="res://Player/player.tscn" id="2_rowah"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rowah"]
+size = Vector3(4.5615234, 1.472168, 1.8237305)
 
 [node name="UpperLutebergMansion" type="Node3D"]
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Node3D"]
 transform = Transform3D(32.02904, 0, 0, 0, 0.3043676, 0, 0, 0, 31.27898, 0, 0, 0)
 use_collision = true
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+[node name="CSGBox3D2" type="CSGBox3D" parent="Node3D"]
 transform = Transform3D(0.3642267, 0, 0, 0, 5.3121796, 0, 0, 0, 31.068832, -15.831219, 2.554921, 0)
 use_collision = true
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+[node name="CSGBox3D3" type="CSGBox3D" parent="Node3D"]
 transform = Transform3D(0.3642267, 0, 0, 0, 5.3121796, 0, 0, 0, 31.068832, 15.8040905, 2.554921, 0)
 use_collision = true
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="."]
+[node name="CSGBox3D4" type="CSGBox3D" parent="Node3D"]
 transform = Transform3D(-1.5920854e-08, 0, 31.068832, 0, 5.3121796, 0, -0.3642267, 0, -1.3580618e-06, 1.3722063, 2.554921, -15.278959)
 use_collision = true
 size = Vector3(1, 1, 0.93078613)
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="."]
+[node name="CSGBox3D5" type="CSGBox3D" parent="Node3D"]
 transform = Transform3D(-1.5920854e-08, 0, 31.068832, 0, 5.3121796, 0, -0.3642267, 0, -1.3580618e-06, -8.886728, 2.554921, 15.342981)
 use_collision = true
 size = Vector3(1, 1, 0.444458)
 
-[node name="CSGBox3D6" type="CSGBox3D" parent="."]
+[node name="CSGBox3D6" type="CSGBox3D" parent="Node3D"]
 transform = Transform3D(-1.5920854e-08, 0, 31.068832, 0, 5.3121796, 0, -0.3642267, 0, -1.3580618e-06, 8.868353, 2.554921, 15.342981)
 use_collision = true
 size = Vector3(1, 1, 0.444458)
 
-[node name="CSGBox3D7" type="CSGBox3D" parent="."]
+[node name="CSGBox3D7" type="CSGBox3D" parent="Node3D"]
 transform = Transform3D(-1.5920854e-08, 0, 31.068832, 0, 5.3121796, 0, -0.3642267, 0, -1.3580618e-06, 8.868353, 2.554921, 9.627589)
 use_collision = true
 size = Vector3(1, 1, 0.444458)
 
-[node name="CSGBox3D8" type="CSGBox3D" parent="."]
+[node name="CSGBox3D8" type="CSGBox3D" parent="Node3D"]
 transform = Transform3D(-1.5920854e-08, 0, 31.068832, 0, 5.3121796, 0, -0.3642267, 0, -1.3580618e-06, 8.868353, 2.554921, -2.1857767)
 use_collision = true
 size = Vector3(1, 1, 0.444458)
 
-[node name="CSGBox3D17" type="CSGBox3D" parent="."]
+[node name="CSGBox3D17" type="CSGBox3D" parent="Node3D"]
 transform = Transform3D(-1.5920854e-08, 0, 31.068832, 0, 5.3121796, 0, -0.3642267, 0, -1.3580618e-06, 10.1364975, 2.554921, -11.347884)
 use_collision = true
 size = Vector3(1, 1, 0.3628235)
 
-[node name="CSGBox3D9" type="CSGBox3D" parent="."]
+[node name="CSGBox3D9" type="CSGBox3D" parent="Node3D"]
 transform = Transform3D(-1.5920854e-08, 0, 31.068832, 0, 5.3121796, 0, -0.3642267, 0, -1.3580618e-06, -8.804237, 2.554921, -2.1857767)
 use_collision = true
 size = Vector3(1, 1, 0.444458)
 
-[node name="CSGBox3D10" type="CSGBox3D" parent="."]
+[node name="CSGBox3D10" type="CSGBox3D" parent="Node3D"]
 transform = Transform3D(-1.5920854e-08, 0, 31.068832, 0, 5.3121796, 0, -0.3642267, 0, -1.3580618e-06, -8.804237, 2.554921, 9.645081)
 use_collision = true
 size = Vector3(1, 1, 0.444458)
 
-[node name="CSGBox3D11" type="CSGBox3D" parent="."]
+[node name="CSGBox3D11" type="CSGBox3D" parent="Node3D"]
 transform = Transform3D(0.3642267, 0, 0, 0, 5.3121796, 0, 0, 0, 31.068832, -2.0871015, 2.554921, 2.0944567)
 use_collision = true
 size = Vector3(1, 1, 0.28860474)
 
-[node name="CSGBox3D15" type="CSGBox3D" parent="."]
+[node name="CSGBox3D15" type="CSGBox3D" parent="Node3D"]
 transform = Transform3D(0.3642267, 0, 0, 0, 5.3121796, 0, 0, 0, 31.068832, -2.0871015, 2.554921, -6.6892614)
 use_collision = true
 size = Vector3(1, 1, 0.28860474)
 
-[node name="CSGBox3D16" type="CSGBox3D" parent="."]
+[node name="CSGBox3D16" type="CSGBox3D" parent="Node3D"]
 transform = Transform3D(0.3642267, 0, 0, 0, 5.3121796, 0, 0, 0, 31.068832, 2.1248188, 2.554921, -6.6892614)
 use_collision = true
 size = Vector3(1, 1, 0.28860474)
 
-[node name="CSGBox3D12" type="CSGBox3D" parent="."]
+[node name="CSGBox3D12" type="CSGBox3D" parent="Node3D"]
 transform = Transform3D(0.3642267, 0, 0, 0, 5.3121796, 0, 0, 0, 31.068832, 2.2991319, 2.554921, 5.0247126)
 use_collision = true
 size = Vector3(1, 1, 0.28860474)
 
-[node name="CSGBox3D13" type="CSGBox3D" parent="."]
+[node name="CSGBox3D13" type="CSGBox3D" parent="Node3D"]
 transform = Transform3D(0.3642267, 0, 0, 0, 5.3121796, 0, 0, 0, 31.068832, 5.1983666, 2.554921, 13.283012)
 use_collision = true
 size = Vector3(1, 1, 0.11781311)
 
-[node name="CSGBox3D14" type="CSGBox3D" parent="."]
+[node name="CSGBox3D14" type="CSGBox3D" parent="Node3D"]
 transform = Transform3D(0.3642267, 0, 0, 0, 5.3121796, 0, 0, 0, 31.068832, -8.444149, 2.554921, 13.283012)
 use_collision = true
 size = Vector3(1, 1, 0.11781311)
+
+[node name="SpawnPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.954466, 0.68053055, -11.569617)
+
+[node name="BossSpawnPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.106785774, 0.68053055, 12.29842)
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.685606, 0.3048017, -14.562837)
+script = ExtResource("1_q8m0c")
+target_scene = "uid://b5jkymgaw5l1s"
+spawn_point_name = "MansionSpawnPoint"
+show_prompt = false
+auto_trigger = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.73157895, -0.41186523)
+shape = SubResource("BoxShape3D_rowah")
+
+[node name="Area3D2" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4202731, 0.39778948, 15.747152)
+script = ExtResource("1_q8m0c")
+target_scene = "uid://c3sy8pfeyht0l"
+show_prompt = false
+auto_trigger = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3852539, 0.49549496, -0.41186523)
+shape = SubResource("BoxShape3D_rowah")
+
+[node name="Player" parent="." instance=ExtResource("2_rowah")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.941644, 0.84898376, -11.722604)

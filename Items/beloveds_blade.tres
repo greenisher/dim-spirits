@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://ci7gso3urduvl"]
+
+[ext_resource type="Script" uid="uid://dpsq82q1qanp6" path="res://Resources/Item.gd" id="1_167hn"]
+[ext_resource type="Texture2D" uid="uid://6lp5o1vwh6et" path="res://Items/beloveds blade.png" id="1_utsqd"]
+
+[resource]
+script = ExtResource("1_167hn")
+item_name = "Blade of her Beloved"
+description = "A greatsword forged from the heart of a meteor. Forged to herald a new age.
+
+Of all the gifts Isadora forged for her sun, this blade was the finest of all. It remains undelivered. No bribe or declaration would bring that good knight back when she saw what Isadora had wrought."
+icon = ExtResource("1_utsqd")
+damage = 15.0
+attack_speed = 0.5
+crit_chance_bonus = 1.0
+metadata/_custom_type_script = "uid://dpsq82q1qanp6"

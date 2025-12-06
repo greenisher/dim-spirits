@@ -62,8 +62,10 @@ text = "Rest at the Campfire"
 label_settings = SubResource("LabelSettings_ws2jc")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 300)
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_horizontal = 4
+size_flags_vertical = 2
 
 [node name="SaveButton" type="TextureButton" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
@@ -125,12 +127,35 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="InviteButton" type="TextureButton" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="InviteGuestOptions" type="MenuButton" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+icon = ExtResource("2_o41sa")
+item_count = 3
+popup/item_0/text = "Rhea"
+popup/item_0/id = 0
+popup/item_1/text = "Asumi"
+popup/item_1/id = 1
+popup/item_2/text = "Skoll"
+popup/item_2/id = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+
+[node name="InviteAsumiButton" type="TextureButton" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 texture_normal = ExtResource("2_o41sa")
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/InviteButton"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer2/InviteAsumiButton"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -145,18 +170,45 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="InviteGuestOptions" type="MenuButton" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+[node name="InviteRheaButton" type="TextureButton" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
-icon = ExtResource("2_o41sa")
-item_count = 3
-popup/item_0/text = "Rhea"
-popup/item_0/id = 0
-popup/item_1/text = "Asumi"
-popup/item_1/id = 1
-popup/item_2/text = "Skoll"
-popup/item_2/id = 2
+texture_normal = ExtResource("2_o41sa")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer2/InviteRheaButton"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -69.0
+offset_right = 67.0
+offset_bottom = 71.0
+grow_horizontal = 2
+text = "Invite"
+label_settings = SubResource("LabelSettings_6uq2d")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="InviteSkollButton" type="TextureButton" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+texture_normal = ExtResource("2_o41sa")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer2/InviteSkollButton"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -69.0
+offset_right = 67.0
+offset_bottom = 71.0
+grow_horizontal = 2
+text = "Invite"
+label_settings = SubResource("LabelSettings_6uq2d")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="PanelContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/PanelContainer"]
 layout_mode = 2

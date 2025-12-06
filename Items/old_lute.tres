@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://trr481wi4np7"]
+
+[ext_resource type="Texture2D" uid="uid://cf2vtqvuumer7" path="res://Assets/Items/Misc/oldluteinventory.png" id="1_iagtj"]
+[ext_resource type="Script" uid="uid://dpsq82q1qanp6" path="res://Resources/Item.gd" id="1_w0snj"]
+
+[resource]
+script = ExtResource("1_w0snj")
+item_name = "Old Lute"
+description = "A reminder of a time before Luteberg was lost, when music rang out on every street. Despite its lonely air, the strumming of it makes you happy.
+
+Before destruction came, Luteberg was ruled by a council of guild masters. First among them was the musician's guild. Now only one of the old masters remains."
+icon = ExtResource("1_iagtj")
+item_type = 3
+metadata/_custom_type_script = "uid://dpsq82q1qanp6"

@@ -1,7 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://b5jkymgaw5l1s"]
+[gd_scene load_steps=20 format=3 uid="uid://b5jkymgaw5l1s"]
 
 [ext_resource type="PackedScene" uid="uid://5dknym1exubj" path="res://Player/player.tscn" id="1_xsmbm"]
-[ext_resource type="PackedScene" uid="uid://bg6util2bcvfw" path="res://Npc/npc.tscn" id="2_n40w2"]
 [ext_resource type="PackedScene" uid="uid://xlbbf32muvqm" path="res://Assets/places/shop2.glb" id="3_360a4"]
 [ext_resource type="PackedScene" uid="uid://btpwuqcy3ik2x" path="res://Assets/places/shop1.glb" id="4_10xpm"]
 [ext_resource type="PackedScene" uid="uid://u2go48f0pmva" path="res://Assets/places/house1.glb" id="5_yc1ja"]
@@ -10,7 +9,11 @@
 [ext_resource type="PackedScene" uid="uid://c72em5ckdkbyp" path="res://Assets/places/flower1.glb" id="8_po03h"]
 [ext_resource type="PackedScene" uid="uid://6dvw1434oej3" path="res://Assets/places/anvil.glb" id="9_4yq7u"]
 [ext_resource type="PackedScene" uid="uid://sx62hcipqyyo" path="res://Assets/places/lamp.glb" id="10_a1c5d"]
+[ext_resource type="Script" uid="uid://cba00ttmfpnef" path="res://Resources/SceneTransition.gd" id="11_360a4"]
 [ext_resource type="ArrayMesh" uid="uid://qyhg233se7o3" path="res://Assets/places/lostburg_middle.obj" id="11_n40w2"]
+[ext_resource type="Script" uid="uid://be71aibbwx7t3" path="res://Resources/ConditionalNPCSpawner.gd" id="12_yc1ja"]
+[ext_resource type="PackedScene" uid="uid://bbivfgl87ne2l" path="res://Npc/Romanceable/skoll.tscn" id="13_0cowo"]
+[ext_resource type="Resource" uid="uid://dhhf30rj0848c" path="res://Npc/Romanceable/skoll_spawn_condition_campfire_2.tres" id="14_24yeo"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_n40w2"]
 
@@ -23,13 +26,17 @@ sky = SubResource("Sky_360a4")
 ambient_light_source = 3
 ambient_light_color = Color(0.39532107, 0.4635147, 0.75516886, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_10xpm"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yc1ja"]
+size = Vector3(1, 2.4939117, 4.6013184)
+
 [node name="UpperLutebergStreets" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 2.0380893, 0, 0, 0)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(16.27839, 0, 0, 0, 0.22128445, 0, 0, 0, 15.620458, 0, 0, 0)
-
-[node name="Player" parent="." instance=ExtResource("1_xsmbm")]
 
 [node name="DecayedStreets" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.6128074, 0, 0, 0)
@@ -38,8 +45,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.6128074, 0, 0, 0)
 transform = Transform3D(37.617874, 0, 0, 0, 0.21882403, 0, 0, 0, 18.36429, 0, 0, 0.098566055)
 use_collision = true
 size = Vector3(1, 1, 2.6572266)
-
-[node name="npc" parent="DecayedStreets" instance=ExtResource("2_n40w2")]
 
 [node name="shop2" parent="DecayedStreets" instance=ExtResource("3_360a4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.969914, 0, -16.559658)
@@ -56,7 +61,7 @@ transform = Transform3D(1, 0, 0, 0, 0.7794697, 0, 0, 0, 1, -19.612652, 0, -1.847
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 9.468077, 0, 2.6698332)
 
 [node name="castle_wall" parent="DecayedStreets" instance=ExtResource("6_0cowo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1005363, 0, -22.33559)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.7222247, 0, -22.33559)
 
 [node name="castle_wall9" parent="DecayedStreets" instance=ExtResource("6_0cowo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1842756, 0, 26.246151)
@@ -97,20 +102,26 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.42536, 0, -22.33559)
 [node name="castle_wall2" parent="DecayedStreets" instance=ExtResource("6_0cowo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0249119, 0, -22.41476)
 
+[node name="castle_wall15" parent="DecayedStreets" instance=ExtResource("6_0cowo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.54033995, 0, -22.41476)
+
 [node name="broken_castle_wall" parent="DecayedStreets" instance=ExtResource("7_24yeo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.779979, 0, -22.415142)
 
 [node name="flower1" parent="DecayedStreets" instance=ExtResource("8_po03h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.79372, 0.10795355, 17.013874)
 
 [node name="anvil" parent="DecayedStreets" instance=ExtResource("9_4yq7u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.462233, 0, 0.9243055)
 
 [node name="lamp" parent="DecayedStreets" instance=ExtResource("10_a1c5d")]
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="DecayedStreets"]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 5.7266636, 1.588243, -20.02666)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.394591, 0, 0)
 
 [node name="shop1" parent="DecayedStreets" instance=ExtResource("4_10xpm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.164835, 0, 16.452581)
+
+[node name="shop6" parent="DecayedStreets" instance=ExtResource("4_10xpm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.164835, 0, 5.1937323)
 
 [node name="shop3" parent="DecayedStreets" instance=ExtResource("3_360a4")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -10.885082, 0, -17.983889)
@@ -119,7 +130,7 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -10.
 transform = Transform3D(-3.505249e-08, 0, 1, 0, 0.75617975, 0, -0.8019075, 0, -4.371139e-08, -9.196161, 0, 20.274462)
 
 [node name="shop4" parent="DecayedStreets" instance=ExtResource("4_10xpm")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 0.7813046, 0, -1, 0, -4.371139e-08, -10.330161, 0, 5.969331)
+transform = Transform3D(1, 0, 0, 0, 0.7813046, 0, 0, 0, 1, -19.64828, 0, 5.969331)
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 2.88838, 0, 0, 0, 0.67374694, 19.549646, 16.20403, 4.508838)
@@ -136,3 +147,67 @@ mesh = ExtResource("11_n40w2")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_10xpm")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.905063, 1.0269585, 5.096111)
+size = Vector3(1, 2.540039, 1)
+
+[node name="SpawnPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6232958, 0, 12.111079)
+
+[node name="Player" parent="." instance=ExtResource("1_xsmbm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9792004, 0, 13.211736)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(0.9992, 0, -0.039992277, 0, 1, 0, 0.039992277, 0, 0.9991999, 13.998598, 1.4401164, 4.8740354)
+size = Vector3(1, 2.3370361, 1)
+material = SubResource("StandardMaterial3D_10xpm")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.853514, 0, 11.214379)
+script = ExtResource("11_360a4")
+target_scene = "uid://dir7l7jkxceeq"
+show_prompt = false
+auto_trigger = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5238848, 0.15478516)
+shape = SubResource("BoxShape3D_yc1ja")
+
+[node name="Area3D3" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.551152, 0, -11.971971)
+script = ExtResource("11_360a4")
+target_scene = "uid://dmipsm5o8aqml"
+show_prompt = false
+auto_trigger = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5238848, 0.15478516)
+shape = SubResource("BoxShape3D_yc1ja")
+
+[node name="Area3D2" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.68367, 0.555846, 5.1075206)
+script = ExtResource("11_360a4")
+target_scene = "uid://kuhoxd2oklfg"
+show_prompt = false
+auto_trigger = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8189516, -0.051757813)
+shape = SubResource("BoxShape3D_yc1ja")
+
+[node name="MansionSpawnPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7227974, 0.3164444, -11.99247)
+
+[node name="WizardSpawnPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.504755, 0.32952118, 4.980489)
+
+[node name="ConditionalNPCSpawner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.907964, 0, -5.082331)
+script = ExtResource("12_yc1ja")
+npc_scene = ExtResource("13_0cowo")
+spawner_id = "Skoll_third_meeting"
+npc_id = "Skoll"
+default_npc_name = "Skoll"
+spawn_conditions = Array[Resource]([ExtResource("14_24yeo")])
+metadata/_custom_type_script = "uid://be71aibbwx7t3"

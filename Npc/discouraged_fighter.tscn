@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=4 uid="uid://djl88iopclt4w"]
+[gd_scene load_steps=12 format=4 uid="uid://djl88iopclt4w"]
 
 [ext_resource type="PackedScene" uid="uid://bg6util2bcvfw" path="res://Npc/npc.tscn" id="1_bcxv0"]
 [ext_resource type="Script" uid="uid://b11a36hiobemd" path="res://Npc/discouraged_fighter.gd" id="2_ee1au"]
 [ext_resource type="Texture2D" uid="uid://dn1jdc34jrsla" path="res://Assets/Characters/DF/discouraged_fighter_anim_0.png" id="2_n4qgd"]
+[ext_resource type="Resource" uid="uid://dr426nlpd2jkm" path="res://Npc/df_dialogue/df_dialogue.tres" id="3_ee1au"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e23do"]
 resource_name = "material_0"
@@ -752,6 +753,7 @@ _data = {
 script = ExtResource("2_ee1au")
 npc_name = "Discouraged Fighter"
 greeting = "We're all lost."
+dialogue_tree = ExtResource("3_ee1au")
 play_greeting_animation = false
 nearby_idle_animation = "SittingIdle"
 default_idle_animation = "SittingIdle"

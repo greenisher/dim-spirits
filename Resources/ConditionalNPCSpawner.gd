@@ -1,10 +1,8 @@
 extends Node3D
 class_name ConditionalNPCSpawner
 
-## Base NPC scene to spawn
 @export var npc_scene: PackedScene
 
-## Unique identifier for this spawner
 @export var spawner_id: String = ""
 
 ## NPC ID (used for relationship tracking)
@@ -111,13 +109,13 @@ func check_and_spawn() -> void:
 	
 	# If condition has despawn_when_invalid, check if still valid
 	if spawned_npc and current_condition and current_condition.despawn_when_invalid:
-		if not current_condition.evaluate_conditions():
+		if not current_condition.is_met():
 			_despawn_npc()
 
 ## Find the best matching condition based on priority
 func _find_best_condition() -> NPCSpawnCondition:
 	for condition in spawn_conditions:
-		if condition and condition.evaluate_conditions():
+		if condition and condition.is_met():
 			return condition
 	
 	# No condition matched, use fallback

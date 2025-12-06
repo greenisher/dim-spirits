@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://boss_template"]
+
+[ext_resource type="Script" path="res://boss_system/bosses/boss_fallen_knight.gd" id="1_boss"]
+[ext_resource type="Script" path="res://boss_system/boss_rig.gd" id="2_rig"]
+[ext_resource type="Script" path="res://HealthComponent.gd" id="3_health"]
+
+[node name="BossFallenKnight" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_boss")
+boss_name = "Fallen Knight"
+boss_subtitle = "Once a Guardian, Now Lost to Despair"
+max_health = 400.0
+poise = 80.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_boss")
+
+[node name="BossRig" type="Node3D" parent="."]
+script = ExtResource("2_rig")
+# NOTE: Set animation_tree_path and skeleton_path to match your rig structure
+# Example: animation_tree_path = "YourModel/AnimationTree"
+
+[node name="AttackArea" type="ShapeCast3D" parent="BossRig"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1.5)
+shape = SubResource("SphereShape3D_attack")
+target_position = Vector3(0, 0, 0)
+collision_mask = 1
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("3_health")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_desired_distance = 0.5
+target_desired_distance = 1.0
+avoidance_enabled = true
+radius = 0.8

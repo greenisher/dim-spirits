@@ -19,7 +19,7 @@ extends Control
 # ==================== CONFIGURATION ====================
 
 ## First scene to load when starting a new game
-@export var first_game_scene: String = "res://scenes/game/main_game.tscn"
+@export var first_game_scene: String = "res://Levels/lostburg_ground.tscn"
 
 ## Default save slot to use for quick continue (1-3)
 @export var default_save_slot: int = 1
@@ -113,6 +113,7 @@ func _on_new_game_pressed() -> void:
 	
 	# ✅ Play intro cutscene FIRST
 	_play_intro_cutscene()
+	SceneManager.start_new_game("res://Levels/lostburg_ground.tscn", "SpawnPoint")
 
 func _play_intro_cutscene() -> void:
 	print("Playing intro cutscene...")
@@ -123,7 +124,7 @@ func _play_intro_cutscene() -> void:
 	cutscene.cutscene_finished.connect(_on_intro_cutscene_finished)
 	
 	# Play the cutscene
-	cutscene.play_cutscene_from_file("res://data/cutscenes/intro_story.json")
+	cutscene.play_cutscene_from_file("res://CutScenes/cutscene_intro.json")
 
 func _on_intro_cutscene_finished() -> void:
 	print("Intro cutscene finished, starting game...")

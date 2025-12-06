@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://mwein3qouugh"]
+
+[ext_resource type="Script" uid="uid://dpsq82q1qanp6" path="res://Resources/Item.gd" id="1_frk04"]
+[ext_resource type="Texture2D" uid="uid://dnv8b4emt2kul" path="res://Assets/Items/Armour/apprenticebadgeinventory.png" id="1_tk2le"]
+
+[resource]
+script = ExtResource("1_frk04")
+item_name = "Apprentice's Badge"
+description = "A talisman in the shape of a hammer, traditionally worn by apprentices of the smith's guild. The tenets of the guild are stamped into the iron: Creation and Transformation both have their place at the anvil.
+
+The final apprentice had no masters left to stop her. She has changed their tenets to read: Creation and destruction under the hammer. This badge precedes her and retains the original words."
+icon = ExtResource("1_tk2le")
+item_type = 3
+metadata/_custom_type_script = "uid://dpsq82q1qanp6"

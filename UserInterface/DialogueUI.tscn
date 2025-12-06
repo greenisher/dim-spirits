@@ -1,7 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bg0ts60edlrdg"]
+[gd_scene load_steps=6 format=3 uid="uid://bg0ts60edlrdg"]
 
 [ext_resource type="Script" uid="uid://bxtath71m7kcc" path="res://UserInterface/DialogueUI.gd" id="1_671f4"]
 [ext_resource type="Texture2D" uid="uid://ci73tn36kaj6k" path="res://Assets/stand-in-image.jpg" id="2_kdinw"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_kdinw"]
+blend_mode = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8notk"]
 bg_color = Color(0.60038817, 0.60038817, 0.60038817, 0.18200001)
@@ -16,6 +19,7 @@ font_size = 24
 font_color = Color(0.8284942, 0.64528364, 0.831592, 1)
 
 [node name="DialogueUI" type="Control"]
+process_mode = 4
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -25,23 +29,39 @@ grow_vertical = 2
 script = ExtResource("1_671f4")
 
 [node name="DialoguePanel" type="Panel" parent="."]
-custom_minimum_size = Vector2(900, 400)
+material = SubResource("CanvasItemMaterial_kdinw")
+custom_minimum_size = Vector2(900, 300)
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_top = -106.0
-offset_bottom = 106.0
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_8notk")
 
+[node name="ColorRect" type="ColorRect" parent="DialoguePanel"]
+z_index = -5
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+color = Color(0.27752772, 0.27752772, 0.27752772, 1)
+
 [node name="HBoxContainer" type="HBoxContainer" parent="DialoguePanel"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+z_index = 1
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -272.0
+grow_horizontal = 2
+grow_vertical = 0
 
 [node name="Portrait" type="TextureRect" parent="DialoguePanel/HBoxContainer"]
 custom_minimum_size = Vector2(128, 128)
@@ -51,6 +71,7 @@ expand_mode = 3
 stretch_mode = 5
 
 [node name="DialogueContent" type="VBoxContainer" parent="DialoguePanel/HBoxContainer"]
+z_index = 1
 layout_mode = 2
 
 [node name="NPCName" type="Label" parent="DialoguePanel/HBoxContainer/DialogueContent"]
@@ -59,7 +80,7 @@ text = "Test"
 label_settings = SubResource("LabelSettings_mb6th")
 
 [node name="DialogueText" type="RichTextLabel" parent="DialoguePanel/HBoxContainer/DialogueContent"]
-custom_minimum_size = Vector2(400, 100)
+custom_minimum_size = Vector2(600, 100)
 layout_mode = 2
 bbcode_enabled = true
 text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean faucibus lobortis suscipit. Suspendisse mauris diam, condimentum eu mauris ut, vulputate molestie lorem. Quisque vulputate tincidunt varius. Morbi sem arcu, dignissim non nibh in, vulputate blandit augue. Quisque rutrum id magna sed finibus. Quisque lorem neque, egestas sit amet ornare euismod, pellentesque et purus. Sed lorem justo, vehicula ac lectus sit amet, mollis cursus urna."

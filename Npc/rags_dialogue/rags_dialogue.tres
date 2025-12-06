@@ -1,15 +1,111 @@
-[gd_resource type="Resource" script_class="DialogueTree" load_steps=4 format=3 uid="uid://diad6ym1h5b31"]
+[gd_resource type="Resource" script_class="DialogueTree" load_steps=17 format=3 uid="uid://diad6ym1h5b31"]
 
 [ext_resource type="Script" uid="uid://i8ylbkrc5p0f" path="res://Resources/DialogueTree.gd" id="1_3hvcv"]
 [ext_resource type="Script" uid="uid://x5v5p8f2l6te" path="res://Resources/DialogueNode.gd" id="1_8akr2"]
+[ext_resource type="Script" uid="uid://b1ar50iy6yie3" path="res://Resources/DialogueResponse.gd" id="2_p517v"]
 
 [sub_resource type="Resource" id="Resource_p517v"]
 script = ExtResource("1_8akr2")
-id = "\"start\""
-text = "\"Hello World\""
+id = "start"
+text = "Well, look at you! I had doubts when I saw Berard had taken in an urchin all those years back, but you look like a half-decent adventurer now."
+auto_continue = true
+auto_continue_node_id = "2"
+npc_animation = "Pointing"
+wait_for_animation = true
+metadata/_custom_type_script = "uid://x5v5p8f2l6te"
+
+[sub_resource type="Resource" id="Resource_grkgo"]
+script = ExtResource("2_p517v")
+text = "So callous, Mr Rags! Father's still injured."
+next_node_id = "3"
+npc_reaction_animation = "Pointing"
+metadata/_custom_type_script = "uid://b1ar50iy6yie3"
+
+[sub_resource type="Resource" id="Resource_p1hg2"]
+script = ExtResource("1_8akr2")
+id = "2"
+text = "Speaking of Berard...Shouldn't he be off? This is his job. Why's his welp doing it?"
+responses = Array[Resource]([SubResource("Resource_grkgo")])
+metadata/_custom_type_script = "uid://x5v5p8f2l6te"
+
+[sub_resource type="Resource" id="Resource_0n6x4"]
+script = ExtResource("1_8akr2")
+id = "3"
+text = "Ah yes! Tell your daddy to forgive poor Rags. I didn't mean to drop that hammer on his foot! Now, shouldn't you be off?"
+auto_continue = true
+auto_continue_node_id = "4"
+metadata/_custom_type_script = "uid://x5v5p8f2l6te"
+
+[sub_resource type="Resource" id="Resource_e4kmj"]
+script = ExtResource("1_8akr2")
+id = "4"
+text = "Don't tell me you don't know where to go! To the south is nothing but an old church. You want to go to the bridge. Follow the path to the old town, girl."
+auto_continue = true
+auto_continue_node_id = "5"
+npc_animation = "Pointing"
+wait_for_animation = true
+metadata/_custom_type_script = "uid://x5v5p8f2l6te"
+
+[sub_resource type="Resource" id="Resource_deasw"]
+script = ExtResource("2_p517v")
+text = "I'll hop to it, sir!"
+next_node_id = "6"
+metadata/_custom_type_script = "uid://b1ar50iy6yie3"
+
+[sub_resource type="Resource" id="Resource_7wvj4"]
+script = ExtResource("2_p517v")
+text = "What else should I look out for?"
+next_node_id = "7"
+metadata/_custom_type_script = "uid://b1ar50iy6yie3"
+
+[sub_resource type="Resource" id="Resource_l7tej"]
+script = ExtResource("1_8akr2")
+id = "5"
+text = "That old girl upstairs woke up and so did her minions. She needs to be put back to sleep. It's bad for business otherwise."
+responses = Array[Resource]([SubResource("Resource_deasw"), SubResource("Resource_7wvj4")])
+metadata/_custom_type_script = "uid://x5v5p8f2l6te"
+
+[sub_resource type="Resource" id="Resource_4tx1x"]
+script = ExtResource("1_8akr2")
+id = "6"
+text = "Hurry on, Whelp."
+end_dialogue = true
+metadata/_custom_type_script = "uid://x5v5p8f2l6te"
+
+[sub_resource type="Resource" id="Resource_lb65o"]
+script = ExtResource("1_8akr2")
+id = "7"
+text = "Hmm...Two birds one stone, and that. Or four birds, one big rock."
+auto_continue = true
+auto_continue_node_id = "8"
+metadata/_custom_type_script = "uid://x5v5p8f2l6te"
+
+[sub_resource type="Resource" id="Resource_pnhyj"]
+script = ExtResource("1_8akr2")
+id = "8"
+text = "You might espy a little elfling maiden on your journey. Don't think of her as innocent. Oh no! She owes me a whole brace of golden coin, thieved right out from under poor Rags!"
+auto_continue = true
+auto_continue_node_id = "9"
+metadata/_custom_type_script = "uid://x5v5p8f2l6te"
+
+[sub_resource type="Resource" id="Resource_uv4xw"]
+script = ExtResource("1_8akr2")
+id = "9"
+text = "And there's another young lady you might meet. A strange one. She makes health potions, up in the ruined church. Tell her old Rags needs another dozen, for his sickly mother."
+auto_continue = true
+auto_continue_node_id = "10"
+metadata/_custom_type_script = "uid://x5v5p8f2l6te"
+
+[sub_resource type="Resource" id="Resource_p24vj"]
+script = ExtResource("1_8akr2")
+id = "10"
+text = "And a third person...I've never seen their face. Just a steel helmet. Good steel too, thinks old Rags. If something were to...happen to them, go ahead and let old Rags know, will you? I'll make sure that armour goes to a good home."
+end_dialogue = true
+npc_animation = "Pointing"
+wait_for_animation = true
 metadata/_custom_type_script = "uid://x5v5p8f2l6te"
 
 [resource]
 script = ExtResource("1_3hvcv")
-dialogue_nodes = Array[Resource]([SubResource("Resource_p517v")])
+dialogue_nodes = Array[Resource]([SubResource("Resource_p517v"), SubResource("Resource_p1hg2"), SubResource("Resource_0n6x4"), SubResource("Resource_e4kmj"), SubResource("Resource_l7tej"), SubResource("Resource_4tx1x"), SubResource("Resource_lb65o"), SubResource("Resource_pnhyj"), SubResource("Resource_uv4xw"), SubResource("Resource_p24vj")])
 metadata/_custom_type_script = "uid://i8ylbkrc5p0f"

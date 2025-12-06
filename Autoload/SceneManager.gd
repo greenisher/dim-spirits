@@ -139,7 +139,7 @@ func change_scene(scene_path: String, spawn_point_name: String = "SpawnPoint") -
 	scene_transition_started.emit(from_scene, scene_path)
 	
 	# Save current player state
-	var player = get_tree().get_first_node_in_group("player")
+	var player = get_tree().get_first_node_in_group("Player")
 	if player:
 		save_player_state(player)
 	
@@ -160,7 +160,7 @@ func change_scene(scene_path: String, spawn_point_name: String = "SpawnPoint") -
 	await get_tree().process_frame  # Extra frame for stability
 	
 	# Restore player state in new scene
-	player = get_tree().get_first_node_in_group("player")
+	player = get_tree().get_first_node_in_group("Player")
 	if player:
 		restore_player_state(player)
 		
@@ -168,7 +168,8 @@ func change_scene(scene_path: String, spawn_point_name: String = "SpawnPoint") -
 		move_player_to_spawn(player, spawn_point_name)
 	else:
 		push_warning("SceneManager: No player found in new scene")
-	
+	if has_node("/root/TransitionScreen"):
+		await TransitionScreen.fade_in(0.5)
 	is_transitioning = false
 	scene_transition_finished.emit(scene_path)
 	print("SceneManager: Transition complete")
@@ -193,7 +194,7 @@ func move_player_to_spawn(player: CharacterBody3D, spawn_name: String) -> void:
 
 func get_player() -> CharacterBody3D:
 	"""Get the current player node"""
-	return get_tree().get_first_node_in_group("player")
+	return get_tree().get_first_node_in_group("Player")
 
 func get_player_data() -> Dictionary:
 	"""Get current player data dictionary"""
@@ -246,3 +247,23 @@ func load_save_data(data: Dictionary) -> void:
 		current_scene_path = data.current_scene
 	
 	print("SceneManager: Save data loaded")
+	
+func start_new_game(first_level: String = "res://Levels/lostburg_ground.tscn", spawn_point: String = "StartPoint") -> void:
+	"""Start a new game with clean state"""
+	# Clear all persistent data
+	clear_player_data()
+	
+	if has_node("/root/GameState"):
+		GameState.clear_all_state()
+	
+	if has_node("/root/RelationshipManager"):
+		RelationshipManager.clear_all_relationships()
+	
+	if has_node("/root/RomanceRestManager"):
+		RomanceRestManager.clear_all_data()
+	
+	# Set initial player stats
+	player_data.spawn_point_name = spawn_point
+	
+	# Load first level
+	change_scene(first_level, spawn_point)

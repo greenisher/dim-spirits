@@ -1,0 +1,67 @@
+[gd_scene load_steps=6 format=3 uid="uid://dm2qfxi8xisei"]
+
+[ext_resource type="Script" path="res://Resources/PickupSpell.gd" id="1_spell"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_spell"]
+radius = 0.15
+height = 0.3
+
+[sub_resource type="StandardMaterial3D" id="Material_spell"]
+albedo_color = Color(0.4, 0.6, 1, 1)
+emission_enabled = true
+emission = Color(0.5, 0.7, 1, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_spell"]
+radius = 1.5
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_spell"]
+emission_shape = 1
+emission_sphere_radius = 0.3
+particle_flag_align_y = true
+direction = Vector3(0, 1, 0)
+spread = 45.0
+initial_velocity_min = 0.5
+initial_velocity_max = 1.0
+gravity = Vector3(0, -0.5, 0)
+scale_min = 0.05
+scale_max = 0.1
+color = Color(0.5, 0.7, 1, 1)
+
+[node name="PickupSpell" type="Node3D"]
+script = ExtResource("1_spell")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("SphereMesh_spell")
+surface_material_override/0 = SubResource("Material_spell")
+
+[node name="InnerSphere" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
+mesh = SubResource("SphereMesh_spell")
+surface_material_override/0 = SubResource("Material_spell")
+
+[node name="InteractionArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("SphereShape3D_spell")
+
+[node name="InteractionPrompt" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 0)
+pixel_size = 0.01
+billboard = 1
+text = "Press Enter to learn spell"
+font_size = 32
+
+[node name="VisualEffect" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Particles" type="GPUParticles3D" parent="VisualEffect"]
+amount = 20
+lifetime = 2.0
+visibility_aabb = AABB(-1, -1, -1, 2, 4, 2)
+process_material = SubResource("ParticleProcessMaterial_spell")
+draw_pass_1 = SubResource("SphereMesh_spell")

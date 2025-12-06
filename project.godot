@@ -30,6 +30,8 @@ RelationshipManager="*res://Autoload/RelationshipManager.gd"
 ErrorTracker="*res://Autoload/ErrorTracker.gd"
 RomanceRestManager="*res://Autoload/RomanceRestManager.gd"
 NpcSpawnManager="*res://Autoload/NPCSpawnManager.gd"
+TransitionScreen="*res://Autoload/TransitionScreen.tscn"
+DialogueTreeManager="*res://Autoload/DialogueTreeManager.gd"
 
 [display]
 

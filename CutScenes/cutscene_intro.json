@@ -1,0 +1,67 @@
+{
+  "cutscene_id": "intro_story",
+  "title": "Intro",
+  "skippable": true,
+  "lines": [
+	{
+	  "speaker": "Narrator",
+	  "text": "In the deepness of time, before the Ancient Smith formed this world, all was cold and still. ",
+	  "portrait_path": "",
+	  "background_path": "res://art/backgrounds/ancient_ruins.png"
+	},
+	{
+	  "speaker": "Narrator",
+	  "text": "The first spark brought life. Dragons, taking flight. The elves, who hide in their forest palaces. Humans.",
+	  "portrait_path": "",
+	  "background_path": "res://art/backgrounds/battlefield.png"
+	},
+	{
+	  "speaker": "Narrator",
+	  "text": "And we carved a place for ourselves. Luteberg, a town of guilds, music, and creation.",
+	  "portrait_path": "",
+	  "background_path": "res://art/backgrounds/village.png"
+	},
+	{
+	  "speaker": "Narrator",
+	  "text": "But this world is incomplete and long forgotten. Tormented by demons summoned by ancient magics. Hidden by fog.",
+	  "portrait_path": "",
+	  "background_path": "res://art/backgrounds/village.png"
+	},
+	{
+	  "speaker": "Narrator",
+	  "text": "Our saviours came from the same forge as you or I. Sól, soldier of the sun. Isadora, the Apprentice.",
+	  "portrait_path": "",
+	  "background_path": "res://art/backgrounds/village.png"
+	},
+	{
+	  "speaker": "Narrator",
+	  "text": "Hand in hand, they cut through the horde to offer us a measure of freedom. And when they cut through the dark, we saw that our tormentors could be killed.",
+	  "portrait_path": "",
+	  "background_path": "res://art/backgrounds/village.png"
+	},
+	{
+	  "speaker": "Narrator",
+	  "text": "But all things fade. The fog around what once was Luteberg grows ever deeper. Hope fades. Sól disappeared a long time ago. Isadora is lost to chaos now, a maker of cruel dolls.",
+	  "portrait_path": "",
+	  "background_path": "res://art/backgrounds/village.png"
+	},
+	{
+	  "speaker": "Narrator",
+	  "text": "Those who leave to reason with her do not return.",
+	  "portrait_path": "",
+	  "background_path": "res://art/backgrounds/village.png"
+	},
+	{
+	  "speaker": "Narrator",
+	  "text": "The demons might be gone but their corruption remains.",
+	  "portrait_path": "",
+	  "background_path": "res://art/backgrounds/village.png"
+	},
+	{
+	  "speaker": "Narrator",
+	  "text": "But prophecy hidden in dusty books foretells of a pilgrim who will one day break through the darkness and hold the sun once more in their hands...",
+	  "portrait_path": "",
+	  "background_path": "res://art/backgrounds/village.png"
+	},
+  ]
+}

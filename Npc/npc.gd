@@ -8,26 +8,20 @@ signal animation_triggered(animation_name: String)
 @export var npc_name: String = "Villager"
 @export var portrait: Texture2D
 @export_multiline var greeting: String = "Hello there, traveler!"
-@export var dialogue_tree: Resource
+@export var dialogue_tree: Resource  # Can be set manually or auto-assigned by DialogueTreeManager
 @export var approval_score: int = 10
 @export var faction: String = 'Rags'
+
+## Use DialogueTreeManager to automatically select dialogue tree based on game state
+@export var use_dynamic_dialogue: bool = true
 
 # ==================== ANIMATION CONFIGURATION ====================
 
 @export_group("Animation Settings")
-## Should NPC play greeting animation when player enters range?
 @export var play_greeting_animation: bool = true
-
-## Animation to play when player first enters interaction range
 @export var greeting_animation: String = "wave"
-
-## Idle animation to loop while player is nearby
 @export var nearby_idle_animation: String = "idle_friendly"
-
-## Default idle animation
 @export var default_idle_animation: String = "idle"
-
-## Time to wait before playing greeting again (prevents spam)
 @export var greeting_cooldown: float = 10.0
 
 @onready var interaction_area: Area3D = $InteractionArea
@@ -45,6 +39,10 @@ var animation_queue: Array[Dictionary] = []
 var is_playing_animation: bool = false
 
 func _ready() -> void:
+	# Add to NPC group for easy finding
+	add_to_group("npc")
+	add_to_group("npc_" + npc_name.to_lower())
+	
 	# Connect interaction area signals
 	if interaction_area:
 		interaction_area.body_entered.connect(_on_body_entered)
@@ -57,6 +55,20 @@ func _ready() -> void:
 	# Ensure DialogueManager knows about this NPC
 	if DialogueManager:
 		DialogueManager.connect_npc(self)
+	
+	# Set AnimationPlayer to work during pause
+	if animation_player:
+		animation_player.process_mode = Node.PROCESS_MODE_ALWAYS
+	
+	# Get dialogue tree from DialogueTreeManager if using dynamic dialogue
+	if use_dynamic_dialogue and has_node("/root/DialogueTreeManager"):
+		var tree_manager = get_node("/root/DialogueTreeManager")
+		var assigned_tree = tree_manager.get_dialogue_tree_for_npc(npc_name)
+		if assigned_tree:
+			dialogue_tree = assigned_tree
+			print("[NPC:%s] Assigned dialogue tree via DialogueTreeManager" % npc_name)
+		else:
+			push_warning("[NPC:%s] No dialogue tree found via DialogueTreeManager, using manual assignment" % npc_name)
 	
 	# Start with default idle animation
 	play_animation(default_idle_animation, true)
@@ -87,9 +99,6 @@ func _on_body_exited(body: Node3D) -> void:
 # ==================== PLAYER DETECTION ANIMATIONS ====================
 
 func _on_player_entered_range() -> void:
-	"""Called when player enters interaction range"""
-	
-	# Play greeting animation if enabled and not on cooldown
 	if play_greeting_animation and not is_talking:
 		var time_since_last_greeting = Time.get_ticks_msec() / 1000.0 - last_greeting_time
 		
@@ -98,25 +107,19 @@ func _on_player_entered_range() -> void:
 			has_greeted_player = true
 			last_greeting_time = Time.get_ticks_msec() / 1000.0
 			
-			# After greeting, switch to nearby idle
 			await get_tree().create_timer(1.0).timeout
 			if player_in_range and not is_talking:
 				play_animation(nearby_idle_animation, true)
 	elif not is_talking:
-		# Just switch to nearby idle animation
 		play_animation(nearby_idle_animation, true)
 
 func _on_player_exited_range() -> void:
-	"""Called when player exits interaction range"""
-	
-	# Return to default idle when player leaves
 	if not is_talking:
 		play_animation(default_idle_animation, true)
 
 # ==================== ANIMATION SYSTEM ====================
 
 func play_animation(anim_name: String, loop: bool = false) -> void:
-	"""Play an animation immediately"""
 	if not animation_player or anim_name.is_empty():
 		return
 	
@@ -124,7 +127,6 @@ func play_animation(anim_name: String, loop: bool = false) -> void:
 		push_warning("Animation '%s' not found on NPC '%s'" % [anim_name, npc_name])
 		return
 	
-	# Godot 4: Set loop mode on the Animation resource
 	var anim = animation_player.get_animation(anim_name)
 	if anim:
 		if loop:
@@ -136,7 +138,6 @@ func play_animation(anim_name: String, loop: bool = false) -> void:
 	animation_triggered.emit(anim_name)
 
 func queue_animation(anim_name: String, wait_for_completion: bool = false, delay_after: float = 0.0) -> void:
-	"""Add animation to queue to play in sequence"""
 	if anim_name.is_empty():
 		return
 	
@@ -147,7 +148,6 @@ func queue_animation(anim_name: String, wait_for_completion: bool = false, delay
 	})
 
 func _process_animation_queue() -> void:
-	"""Process queued animations"""
 	if animation_queue.is_empty() or is_playing_animation:
 		return
 	
@@ -165,12 +165,10 @@ func _process_animation_queue() -> void:
 	is_playing_animation = false
 
 func stop_animation() -> void:
-	"""Stop current animation"""
 	if animation_player:
 		animation_player.stop()
 
 func get_current_animation() -> String:
-	"""Get currently playing animation name"""
 	if animation_player:
 		return animation_player.current_animation
 	return ""
@@ -181,10 +179,20 @@ func start_dialogue() -> void:
 	if is_talking:
 		return
 	
+	# Update dialogue tree before starting (in case game state changed)
+	if use_dynamic_dialogue and has_node("/root/DialogueTreeManager"):
+		var tree_manager = get_node("/root/DialogueTreeManager")
+		var updated_tree = tree_manager.get_dialogue_tree_for_npc(npc_name)
+		if updated_tree:
+			dialogue_tree = updated_tree
+	
+	# Mark character as met (for first meeting dialogue tracking)
+	if not GameState.has_met_character(npc_name):
+		GameState.mark_character_met(npc_name)
+	
 	is_talking = true
 	current_node_id = "start"
 	
-	# Stop any idle animations and switch to talk animation
 	play_animation("talk", true)
 	
 	dialogue_started.emit(self)
@@ -193,7 +201,6 @@ func end_dialogue() -> void:
 	is_talking = false
 	current_node_id = "start"
 	
-	# Return to appropriate idle animation
 	if player_in_range:
 		play_animation(nearby_idle_animation, true)
 	else:
@@ -202,11 +209,9 @@ func end_dialogue() -> void:
 	dialogue_ended.emit(self)
 
 func get_current_dialogue() -> Dictionary:
-	# If we have a dialogue tree, use it
 	if dialogue_tree:
 		var node = dialogue_tree.get_node_by_id(current_node_id)
 		
-		# Fallback to start node if current node not found
 		if not node:
 			node = dialogue_tree.get_start_node()
 			if node:
@@ -214,43 +219,76 @@ func get_current_dialogue() -> Dictionary:
 		
 		if node:
 			# Play node animation if specified
-			if node.has("npc_animation") and not node.npc_animation.is_empty():
-				if node.get("wait_for_animation", false):
+			if node.npc_animation and not node.npc_animation.is_empty():
+				if node.wait_for_animation:
 					queue_animation(node.npc_animation, true)
 				else:
 					play_animation(node.npc_animation, false)
 			
-			# Convert DialogueNode to dictionary format
 			var responses_array = []
 			
-			# Access the responses property directly
-			if node.responses:
-				for response in node.responses:
-					if response:
+			if node.responses != null and node.responses.size() > 0:
+				for i in range(node.responses.size()):
+					var response = node.responses[i]
+					if response != null:
 						responses_array.append({
 							"text": response.text,
 							"next_id": response.next_node_id,
-							"affection_change": response.affection_change,
-							"reputation_change": response.reputation_change,
-							"faction_id": response.faction_id,
-							"npc_reaction_animation": response.get("npc_reaction_animation", ""),
-							"animation_delay": response.get("animation_delay", 0.0)
+							"affection_change": response.affection_change if response.affection_change else 0,
+							"reputation_change": response.reputation_change if response.reputation_change else 0,
+							"faction_id": response.faction_id if response.faction_id else "",
+							"npc_reaction_animation": response.npc_reaction_animation if response.npc_reaction_animation else "",
+							"animation_delay": response.animation_delay if response.animation_delay else 0.0
 						})
 			
-			# Check if this node ends dialogue
+			# Handle auto-continue
+			if responses_array.is_empty():
+				if node.auto_continue and node.auto_continue_node_id and not node.auto_continue_node_id.is_empty():
+					responses_array.append({
+						"text": "Continue...",
+						"next_id": node.auto_continue_node_id,
+						"affection_change": 0,
+						"reputation_change": 0,
+						"faction_id": "",
+						"npc_reaction_animation": "",
+						"animation_delay": 0.0,
+						"is_continue": true
+					})
+				elif not node.end_dialogue:
+					responses_array.append({
+						"text": "End Conversation",
+						"next_id": "_END_",
+						"affection_change": 0,
+						"reputation_change": 0,
+						"faction_id": "",
+						"npc_reaction_animation": "",
+						"animation_delay": 0.0,
+						"is_end_button": true
+					})
+			
 			if node.end_dialogue:
-				responses_array = []
+				responses_array = [{
+					"text": "End Conversation",
+					"next_id": "_END_",
+					"affection_change": 0,
+					"reputation_change": 0,
+					"faction_id": "",
+					"npc_reaction_animation": "",
+					"animation_delay": 0.0,
+					"is_end_button": true
+				}]
 			
 			return {
 				"npc_name": npc_name,
 				"portrait": portrait,
 				"text": node.text,
 				"responses": responses_array,
-				"npc_animation": node.get("npc_animation", ""),
-				"wait_for_animation": node.get("wait_for_animation", false)
+				"npc_animation": node.npc_animation if node.npc_animation else "",
+				"wait_for_animation": node.wait_for_animation if node.wait_for_animation else false,
+				"auto_continue": node.auto_continue if node.auto_continue else false
 			}
 	
-	# Fallback to hardcoded dialogue if no tree
+	# Fallback
 	return {
 		"npc_name": npc_name,
 		"portrait": portrait,
@@ -259,7 +297,6 @@ func get_current_dialogue() -> Dictionary:
 	}
 
 func get_available_responses() -> Array:
-	# This will be expanded with the dialogue tree system
 	return [
 		{"text": "Tell me about yourself.", "next_id": "about"},
 		{"text": "What's happening around here?", "next_id": "news"},
@@ -267,38 +304,37 @@ func get_available_responses() -> Array:
 	]
 
 func handle_response(response_id: String, response_data: Dictionary = {}) -> Dictionary:
-	# Play reaction animation if specified
+	# Play reaction animation
 	if response_data.has("npc_reaction_animation") and not response_data["npc_reaction_animation"].is_empty():
 		var anim_delay = response_data.get("animation_delay", 0.0)
 		queue_animation(response_data["npc_reaction_animation"], true, anim_delay)
 	
-	# If using dialogue tree, navigate to next node
+	# Handle special _END_ response
+	if response_id == "_END_":
+		end_dialogue()
+		return {"text": "", "responses": []}
+	
 	if dialogue_tree:
 		if response_id == "end":
 			end_dialogue()
 			return {"text": "", "responses": []}
 		
-		# Find the response that was selected to get its effects
+		# Apply response effects
 		var current_node = dialogue_tree.get_node_by_id(current_node_id)
 		if current_node and current_node.responses:
 			for response in current_node.responses:
 				if response and response.next_node_id == response_id:
-					# Apply affection change
 					if response.affection_change != 0:
 						apply_affection_change(response.affection_change)
 					
-					# Apply reputation change
 					if response.reputation_change != 0:
 						apply_reputation_change(response.reputation_change, response.faction_id)
 					break
 		
-		# Update current node ID
 		current_node_id = response_id
-		
-		# Get the new node's dialogue
 		return get_current_dialogue()
 	
-	# Fallback to hardcoded dialogue
+	# Fallback hardcoded dialogue
 	match response_id:
 		"about":
 			return {
@@ -323,26 +359,21 @@ func handle_response(response_id: String, response_data: Dictionary = {}) -> Dic
 			return {"text": greeting, "responses": get_available_responses()}
 
 func apply_affection_change(amount: int) -> void:
-	# Update approval score
 	approval_score += amount
 	
-	# Notify RomanceManager if it exists
 	if has_node("/root/RomanceManager"):
 		var romance_manager = get_node("/root/RomanceManager")
-		if romance_manager.has_method("modify_affection"):
-			romance_manager.modify_affection(npc_name, amount)
+		if romance_manager.romance_partner.has(npc_name):
+			romance_manager.add_reputation(npc_name, amount)
 	
 	print("%s affection changed by %d (now: %d)" % [npc_name, amount, approval_score])
 
 func apply_reputation_change(amount: int, faction_name: String = "") -> void:
-	# Use the NPC's faction if no specific faction provided
 	var target_faction = faction_name if not faction_name.is_empty() else faction
 	
-	# Notify ReputationManager if it exists
 	if has_node("/root/ReputationManager"):
 		var reputation_manager = get_node("/root/ReputationManager")
-		if reputation_manager.has_method("modify_reputation"):
-			reputation_manager.modify_reputation(target_faction, amount)
+		reputation_manager.add_reputation(target_faction, amount)
 	
 	print("%s faction reputation changed by %d" % [target_faction, amount])
 

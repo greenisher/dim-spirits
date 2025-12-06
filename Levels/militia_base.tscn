@@ -1,12 +1,26 @@
-[gd_scene load_steps=6 format=3 uid="uid://lw6omj8k6eam"]
+[gd_scene load_steps=18 format=3 uid="uid://lw6omj8k6eam"]
 
 [ext_resource type="PackedScene" uid="uid://5dknym1exubj" path="res://Player/player.tscn" id="1_2ookj"]
 [ext_resource type="PackedScene" uid="uid://bleged7jwjeg" path="res://Assets/places/chest.glb" id="2_rqrkp"]
 [ext_resource type="PackedScene" uid="uid://sx62hcipqyyo" path="res://Assets/places/lamp.glb" id="3_txm0b"]
 [ext_resource type="PackedScene" uid="uid://bxku5ow380k5h" path="res://Assets/places/candle.glb" id="4_rr11i"]
+[ext_resource type="Script" uid="uid://cba00ttmfpnef" path="res://Resources/SceneTransition.gd" id="5_rr11i"]
+[ext_resource type="PackedScene" uid="uid://b1vgaqafsaf87" path="res://Resources/pickup_item.tscn" id="6_g0d3w"]
+[ext_resource type="Resource" uid="uid://bbemkhha4lsdq" path="res://Items/broken_militia_sword.tres" id="7_bkk5t"]
+[ext_resource type="Resource" uid="uid://trr481wi4np7" path="res://Items/old_lute.tres" id="8_vbvcr"]
+[ext_resource type="Script" uid="uid://be71aibbwx7t3" path="res://Resources/ConditionalNPCSpawner.gd" id="9_aa8km"]
+[ext_resource type="PackedScene" uid="uid://beqgsxribgm3x" path="res://Npc/Romanceable/rhea.tscn" id="10_5s8w7"]
+[ext_resource type="Resource" uid="uid://6koqu3mvx2sg" path="res://Npc/Romanceable/rhea_spawn_condition_campfire_1.tres" id="11_fhkhh"]
+[ext_resource type="PackedScene" uid="uid://bbivfgl87ne2l" path="res://Npc/Romanceable/skoll.tscn" id="12_2eluf"]
+[ext_resource type="Resource" uid="uid://txif3po6jp14" path="res://Npc/Romanceable/skoll_spawn_condition_campfire_1.tres" id="13_18lq5"]
+[ext_resource type="PackedScene" uid="uid://dwuju2p25jw0h" path="res://Npc/Romanceable/asumi.tscn" id="14_t1tve"]
+[ext_resource type="Resource" uid="uid://b3xk3i8ue45gi" path="res://Npc/Romanceable/asumi_spawn_condition_campfire_1.tres" id="15_d6qgr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_652b7"]
 albedo_color = Color(0.3854925, 0.38549247, 0.38549247, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_652b7"]
+size = Vector3(4.2766113, 2.3192139, 1.5014648)
 
 [node name="MilitiaBase" type="Node3D"]
 
@@ -16,6 +30,7 @@ use_collision = true
 material = SubResource("StandardMaterial3D_652b7")
 
 [node name="Player" parent="." instance=ExtResource("1_2ookj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14002818, 12.183375)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
 transform = Transform3D(31.798727, 0, 0, 0, 4.3651376, 0, 0, 0, 0.45428342, -0.496243, 1.9738998, -15.190591)
@@ -206,3 +221,73 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6466646, -0.03226018)
 [node name="SpotLight3D" type="SpotLight3D" parent="lamp8/candle"]
 spot_angle = 168.16
 spot_angle_attenuation = 1.0352645
+
+[node name="SpawnPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12.071096)
+
+[node name="MilitiaBossSpawnPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.688278, 0, -10.2981615)
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 13.557299)
+script = ExtResource("5_rr11i")
+target_scene = "uid://cghu2f4ti2ff1"
+spawn_point_name = "MilitiaSpawnPoint"
+show_prompt = false
+auto_trigger = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.16711426, 1.3690395, 1.2253075)
+shape = SubResource("BoxShape3D_652b7")
+
+[node name="Area3D2" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.677217, 0, -12.738967)
+script = ExtResource("5_rr11i")
+target_scene = "uid://b76s3y8sm8f4k"
+show_prompt = false
+auto_trigger = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.16711426, 1.3690395, 1.4760399)
+shape = SubResource("BoxShape3D_652b7")
+
+[node name="PickupItem" parent="." instance=ExtResource("6_g0d3w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.263175, 0, 11.425072)
+item = ExtResource("7_bkk5t")
+
+[node name="PickupItem2" parent="." instance=ExtResource("6_g0d3w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.225161, 0, -1.279932)
+item = ExtResource("8_vbvcr")
+
+[node name="ConditionalNPCSpawner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.099406, 0, 9.861156)
+script = ExtResource("9_aa8km")
+npc_scene = ExtResource("10_5s8w7")
+spawner_id = "Rhea_second_meeting"
+npc_id = "Rhea"
+default_npc_name = "Rhea"
+spawn_conditions = Array[Resource]([ExtResource("11_fhkhh")])
+use_fallback = false
+metadata/_custom_type_script = "uid://be71aibbwx7t3"
+
+[node name="ConditionalNPCSpawner2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.837375, 0, -13.290053)
+script = ExtResource("9_aa8km")
+npc_scene = ExtResource("12_2eluf")
+spawner_id = "Skoll_second_meeting"
+npc_id = "Skoll"
+default_npc_name = "Skoll"
+spawn_conditions = Array[Resource]([ExtResource("13_18lq5")])
+use_fallback = false
+metadata/_custom_type_script = "uid://be71aibbwx7t3"
+
+[node name="ConditionalNPCSpawner3" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.103944, 0, -2.5251508)
+script = ExtResource("9_aa8km")
+npc_scene = ExtResource("14_t1tve")
+spawner_id = "Asumi_second_meeting"
+npc_id = "Asumi"
+default_npc_name = "Asumi"
+spawn_conditions = Array[Resource]([ExtResource("15_d6qgr")])
+use_fallback = false
+metadata/_custom_type_script = "uid://be71aibbwx7t3"

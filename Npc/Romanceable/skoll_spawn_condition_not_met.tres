@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="NPCSpawnCondition" load_steps=2 format=3 uid="uid://f3ulgwncfb3b"]
+
+[ext_resource type="Script" uid="uid://bqyh5hdyup2db" path="res://Resources/NPCSpawnCondition.gd" id="1_ij0jy"]
+
+[resource]
+script = ExtResource("1_ij0jy")
+condition_id = "skoll_not_met"
+story_flag = "met_skoll"
+invert_flag = true
+metadata/_custom_type_script = "uid://bqyh5hdyup2db"

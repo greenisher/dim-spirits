@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=4 uid="uid://bk0jhmy4ktr78"]
+[gd_scene load_steps=13 format=4 uid="uid://bk0jhmy4ktr78"]
 
 [ext_resource type="PackedScene" uid="uid://bg6util2bcvfw" path="res://Npc/npc.tscn" id="1_c4kqj"]
 [ext_resource type="Script" uid="uid://cvlon15ynbpcl" path="res://Npc/rags.gd" id="2_k6rho"]
 [ext_resource type="Texture2D" uid="uid://bgu8vqu6h6u5o" path="res://Assets/Characters/Rags/rags_anims_0.png" id="2_x0lvc"]
+[ext_resource type="Resource" uid="uid://diad6ym1h5b31" path="res://Npc/rags_dialogue/rags_dialogue.tres" id="3_k6rho"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qfshk"]
 resource_name = "material_0"
@@ -1146,6 +1147,7 @@ _data = {
 [node name="npc" instance=ExtResource("1_c4kqj")]
 script = ExtResource("2_k6rho")
 npc_name = "Rags"
+dialogue_tree = ExtResource("3_k6rho")
 play_greeting_animation = false
 nearby_idle_animation = "StandardIdle"
 default_idle_animation = "StandardIdle"

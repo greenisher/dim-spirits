@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://b6ym3rqngnw7p"]
+
+[ext_resource type="Script" uid="uid://dpsq82q1qanp6" path="res://Resources/Item.gd" id="1_qb3qt"]
+[ext_resource type="Texture2D" uid="uid://dmbv005k7o61d" path="res://Assets/Items/Misc/schoolbookInventory.png" id="1_udg5t"]
+
+[resource]
+script = ExtResource("1_qb3qt")
+item_name = "Old School Book"
+description = "The owner of this schoolbook was evidently a skilled a dreamer. Notes of their arcane creations litter the pages. Isadora is written in flowery script on the cover.
+
+When chaos threatened Luteberg, an apprentice of the smith's guild and her beloved rallied and protected what was left of the town with a mixture of swords forged to slay demons and puppet soldiers built to defend."
+icon = ExtResource("1_udg5t")
+item_type = 3
+metadata/_custom_type_script = "uid://dpsq82q1qanp6"

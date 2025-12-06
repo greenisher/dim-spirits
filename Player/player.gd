@@ -2,15 +2,35 @@ extends CharacterBody3D
 class_name Player
 
 const SPEED = 5.0
-const JUMP_VELOCITY = 4.5
+const JUMP_VELOCITY = 10.0  # Increased from 6.0 for higher jumps
 const DECAY := 8.0
 
-var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
+# Jump feel improvements
+const JUMP_HORIZONTAL_BOOST = 2  # Multiplier for horizontal speed during jump
+const GRAVITY_SCALE = 1.0  # Makes gravity stronger (less floaty)
+const FALL_GRAVITY_MULTIPLIER = 1.5  # Fall faster than we rise
+const MAX_FALL_SPEED = 30.0  # Terminal velocity
+
+# Advanced jump mechanics
+const COYOTE_TIME = 0.50  # Grace period after leaving ground
+const JUMP_BUFFER_TIME = 0.20  # Can press jump slightly before landing
+const JUMP_CUT_MULTIPLIER = 0.5  # How much to cut jump when releasing early
+
+var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity") * GRAVITY_SCALE
 
 var _attack_direction := Vector3.ZERO
 
 # Camera variables
 var _mouse_delta := Vector2.ZERO
+
+# Jump state tracking
+var coyote_timer: float = 0.0
+var jump_buffer_timer: float = 0.0
+var is_jumping: bool = false
+var jump_released: bool = true
+
+# Weapon management
+var current_weapon: Node3D = null
 
 @export var mouse_sensitivity: float = 0.00075
 @export var min_boundary: float = -60
@@ -29,8 +49,9 @@ var _mouse_delta := Vector2.ZERO
 @onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
 @onready var area_attack: ShapeCast3D = $RigPivot/AreaAttack
 @onready var user_interface: Control = $UserInterface
-@onready var magic_system: MagicSystem = $MagicSystem  # NEW
-@onready var cast_origin: Node3D = $RigPivot/CastOrigin  # NEW - Where spells spawn
+@onready var magic_system: MagicSystem = $MagicSystem
+@onready var cast_origin: Node3D = $RigPivot/CastOrigin
+@onready var weapon_slot: Node3D = %WeaponSlot
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -103,13 +124,17 @@ func _physics_process(delta: float) -> void:
 	if is_in_gameplay_mode():
 		handle_camera_rotation(delta)
 	
-	player_movement(10.0)
+	# Handle improved jump mechanics
+	handle_jump_mechanics(delta)
+	
+	player_movement(delta)
 	handle_slashing_physics_frame(delta)
 	handle_overhead_physics_frame()
 	handle_rolling_physics_frame(delta)
 	move_and_slide()
-	if not is_on_floor():
-		velocity += get_gravity() * delta
+	
+	# Apply gravity with improvements
+	apply_improved_gravity(delta)
 
 func _process(delta: float) -> void:
 	# Regenerate mana
@@ -136,16 +161,84 @@ func handle_camera_rotation(_delta: float):
 		# Reset mouse delta
 		_mouse_delta = Vector2.ZERO
 
+# ==================== IMPROVED JUMP MECHANICS ====================
+
+func handle_jump_mechanics(delta: float) -> void:
+	"""Handles coyote time, jump buffering, and jump input detection"""
+	var was_on_floor = is_on_floor()
+	
+	# Update coyote timer (grace period after leaving ground)
+	if was_on_floor:
+		coyote_timer = COYOTE_TIME
+		is_jumping = false
+	else:
+		coyote_timer -= delta
+	
+	# Update jump buffer timer (can press jump before landing)
+	if Input.is_action_just_pressed("jump"):
+		jump_buffer_timer = JUMP_BUFFER_TIME
+		jump_released = false
+	else:
+		jump_buffer_timer -= delta
+	
+	# Track if jump button was released (for variable jump height)
+	if Input.is_action_just_released("jump"):
+		jump_released = true
+	
+	# Can we jump? (either on ground, or within coyote time)
+	var can_jump = coyote_timer > 0.0 and not is_jumping
+	
+	# Should we jump? (jump buffer active and we can jump)
+	if jump_buffer_timer > 0.0 and can_jump and is_in_gameplay_mode():
+		perform_jump()
+		jump_buffer_timer = 0.0  # Consume the buffer
+		coyote_timer = 0.0  # Consume coyote time
+	
+	# Variable jump height - cut jump short if button released early
+	if jump_released and velocity.y > 0 and is_jumping:
+		velocity.y *= JUMP_CUT_MULTIPLIER
+		is_jumping = false  # Stop tracking this jump
+
+func perform_jump() -> void:
+	"""Executes the jump with horizontal boost"""
+	velocity.y = JUMP_VELOCITY
+	is_jumping = true
+	jump_released = false
+	
+	# Add horizontal momentum boost in movement direction
+	var movement_direction = get_movement_direction()
+	if not movement_direction.is_zero_approx():
+		# Boost horizontal velocity during jump
+		velocity.x += movement_direction.x * SPEED * (JUMP_HORIZONTAL_BOOST - 1.0)
+		velocity.z += movement_direction.z * SPEED * (JUMP_HORIZONTAL_BOOST - 1.0)
+	
+	# Play jump animation
+	jump()
+	
+	print("JUMP! Velocity: ", velocity, " Boost: ", JUMP_HORIZONTAL_BOOST)
+
+func apply_improved_gravity(delta: float) -> void:
+	"""Apply gravity with separate fall speed and terminal velocity"""
+	if not is_on_floor():
+		var gravity_force = gravity
+		
+		# Fall faster than we rise (more natural feel)
+		if velocity.y < 0:
+			gravity_force *= FALL_GRAVITY_MULTIPLIER
+		
+		velocity.y -= gravity_force * delta
+		
+		# Clamp to terminal velocity
+		velocity.y = maxf(velocity.y, -MAX_FALL_SPEED)
+
+# ==================== MOVEMENT ====================
+
 func player_movement(delta):
 	if not rig.is_idle() and not rig.is_dashing():
 		return
 
 	# Only handle gameplay input when in gameplay mode
 	if is_in_gameplay_mode():
-		if Input.is_action_just_pressed("jump") and is_on_floor():
-			velocity.y = JUMP_VELOCITY
-			jump()
-		
 		if rig.is_idle():
 			# Melee attacks
 			if Input.is_action_just_pressed("light_attack"):
@@ -182,15 +275,20 @@ func player_movement(delta):
 	var direction := get_movement_direction()
 	rig.update_animation_tree(direction)
 	
+	# Better air control - allow some movement adjustment while airborne
+	var target_speed = SPEED
+	if not is_on_floor():
+		target_speed *= 0.8  # Slightly reduced air control
+	
 	velocity.x = exponential_decay(
 		velocity.x, 
-		direction.x * SPEED,
+		direction.x * target_speed,
 		DECAY,
 		delta)
 	
 	velocity.z = exponential_decay(
 		velocity.z, 
-		direction.z * SPEED,
+		direction.z * target_speed,
 		DECAY,
 		delta)
 	
@@ -277,6 +375,45 @@ func heavy_attack() -> void:
 	
 func jump() -> void:
 	rig.travel('Jump')
+
+# ==================== WEAPON MANAGEMENT ====================
+
+func equip_weapon(weapon_scene_path: String) -> void:
+	"""Load and equip a weapon from a packed scene path"""
+	# Unequip current weapon first
+	unequip_weapon()
+	
+	# Load the weapon scene
+	var weapon_scene = load(weapon_scene_path)
+	if not weapon_scene:
+		push_error("Failed to load weapon scene: " + weapon_scene_path)
+		return
+	
+	# Instantiate the weapon
+	current_weapon = weapon_scene.instantiate()
+	if not current_weapon:
+		push_error("Failed to instantiate weapon from scene: " + weapon_scene_path)
+		return
+	
+	# Add to weapon slot
+	if weapon_slot:
+		weapon_slot.add_child(current_weapon)
+		print("✅ Weapon equipped: ", weapon_scene_path)
+	else:
+		push_error("WeaponSlot node not found!")
+		current_weapon.queue_free()
+		current_weapon = null
+
+func unequip_weapon() -> void:
+	"""Remove currently equipped weapon"""
+	if current_weapon and is_instance_valid(current_weapon):
+		current_weapon.queue_free()
+		current_weapon = null
+		print("Weapon unequipped")
+
+func get_equipped_weapon() -> Node3D:
+	"""Returns the currently equipped weapon, or null if none"""
+	return current_weapon
 
 # ==================== MAGIC SYSTEM ====================
 
